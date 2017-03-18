@@ -395,3 +395,88 @@
 .tutorial-page .title{
     color: #FFFFFF;
 }
+
+@media (min-width: 768px){
+    .index-page .wrapper .header .container .row {
+      margin-top: 20vh;
+      color: whitesmoke;
+      overflow: hidden;
+    }
+}
+
+@media (max-width: 768px){
+    .index-page .wrapper .header .container .row {
+      margin-top: 6vh;
+      color: whitesmoke;
+      overflow: hidden;
+    }
+}
+
+.index-page .wrapper .header .container .row .title{
+  color: whitesmoke !important;
+}
+
+@media (min-width: 768px){
+    .article-head .container .row {
+      margin-top: 15vh;
+      color: whitesmoke;
+    }
+}
+
+@media (max-width: 768px){
+    .article-head .container .row {
+      margin-top: 6vh;
+      color: whitesmoke;
+    }
+    .wrapper > .header {
+        height: 120vh !important;
+        overflow: hidden;
+    }
+    .wrapper > .article-head {
+        height: 45vh !important;
+        overflow: hidden;
+    }
+}
+
+.article-head .container .row .title{
+  color: whitesmoke !important;
+}
+
+.header-filter div.container{
+    background-color: rgba(0,0,0,0.5)
+}
+
+.align-right {
+    text-align: right;
+}
+.align-left {
+    text-align: left;
+}
+.align-justify {
+    text-align: justify;
+}
+.align-center {
+    text-align: center;
+}
+.navbar, .navbar.navbar-default {
+    background-color: rgba(10,10,10,0.75) !important;
+}
+.catlist{
+    list-style-type: none;
+}
+.catego a,
+.catlist > li a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+.catego a:hover,
+.catlist > li a:hover {
+    color: whitesmoke;
+    text-decoration: underline;
+}
+.catego a:active,
+.catlist > li a:active {
+    color: whitesmoke;
+    text-decoration: underline;
+    font-weight: 700;
+}
