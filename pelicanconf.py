@@ -31,11 +31,11 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = 10
 
-PLUGIN_PATHS = ['/home/dleon/Proyectos/Sandbox/newsite/pelican-plugins']
+PLUGIN_PATHS = ['/home/dleon/Proyectos/eisenheimjelid.github.io/pelican-plugins']
 
 PLUGINS = ['sitemap']
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-THEME = '/home/dleon/Proyectos/Sandbox/newsite/themes/davfl'
+THEME = '/home/dleon/Proyectos/eisenheimjelid.github.io/themes/davfl'
