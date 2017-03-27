@@ -480,3 +480,7 @@
     text-decoration: underline;
     font-weight: 700;
 }
+
+.article-contenido img {
+    width: 100%;
+}

@@ -5,35 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/</loc>
-<lastmod>2017-03-26T19:34:51-00:00</lastmod>
+<lastmod>2017-03-26T19:55:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/archives.html</loc>
-<lastmod>2017-03-26T19:34:51-00:00</lastmod>
+<lastmod>2017-03-26T19:55:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/tags.html</loc>
-<lastmod>2017-03-26T19:34:51-00:00</lastmod>
+<lastmod>2017-03-26T19:55:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/categories.html</loc>
-<lastmod>2017-03-26T19:34:51-00:00</lastmod>
+<lastmod>2017-03-26T19:55:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/pages/licencia.html</loc>
-<lastmod>2017-03-26T19:34:51-00:00</lastmod>
+<lastmod>2017-03-26T19:55:47-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -60,14 +60,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/linux.html</loc>
+<loc>http://www.davfl.com.mx/tag/bash.html</loc>
 <lastmod>2017-03-24T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/bash.html</loc>
+<loc>http://www.davfl.com.mx/tag/linux.html</loc>
 <lastmod>2017-03-24T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
