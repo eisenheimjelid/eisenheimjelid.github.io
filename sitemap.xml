@@ -5,35 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/</loc>
-<lastmod>2017-03-26T19:55:47-00:00</lastmod>
+<lastmod>2017-03-27T23:14:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/archives.html</loc>
-<lastmod>2017-03-26T19:55:47-00:00</lastmod>
+<lastmod>2017-03-27T23:14:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/tags.html</loc>
-<lastmod>2017-03-26T19:55:47-00:00</lastmod>
+<lastmod>2017-03-27T23:14:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/categories.html</loc>
-<lastmod>2017-03-26T19:55:47-00:00</lastmod>
+<lastmod>2017-03-27T23:14:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/pages/licencia.html</loc>
-<lastmod>2017-03-26T19:55:47-00:00</lastmod>
+<lastmod>2017-03-27T23:14:21-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/instalar-y-configurar-boinc-en-debian.html</loc>
+<lastmod>2017-03-27T20:20:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -46,6 +53,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://www.davfl.com.mx/category/boinc.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://www.davfl.com.mx/category/debian.html</loc>
 <lastmod>2017-03-24T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
@@ -53,8 +67,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/terminal.html</loc>
-<lastmod>2017-03-24T20:20:00-06:37</lastmod>
+<loc>http://www.davfl.com.mx/tag/linux.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/distribuido.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -67,7 +88,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/linux.html</loc>
+<loc>http://www.davfl.com.mx/tag/debian.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/terminal.html</loc>
 <lastmod>2017-03-24T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -75,7 +103,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/author/david-leon.html</loc>
-<lastmod>2017-03-24T20:20:00-06:37</lastmod>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
