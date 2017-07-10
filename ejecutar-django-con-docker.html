@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Sitio Web de David León - Ejecutar Django con Docker</title>
+    <meta description="Publicación de noticias, tips y tutoriales de programación y tecnologías de la información" />
+    <meta name="author" content="David León">
+    <meta author="David León" />
+    <link rel="icon" href="./theme/favicon.ico">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="./theme/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/materialkit.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/main.css" rel="stylesheet"/>
+</head>
+
+<body>
+<nav class="navbar navbar-fixed-top navbar-color-on-scroll">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://davfl.com.mx/">David León</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation-example">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/archives.html">
+                        <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="http://blog.davfl.com.mx/" title="Blog" target="_blank">
+                        <i class="fa fa-heart-o"></i> d'Ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/jelidleon" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/eisenheimjelid/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tumblr.com/blog/jelid" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-tumblr"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>    <div class="wrapper">
+        <div class="header header-filter article-head" style="background-image: url('./theme/assets/img/background.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title">Ejecutar Django con Docker</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main main-raised">
+            <div class="container"><br />
+            <div class="row">
+                    <div class="col-sm-8 col-md-8 col-sx-12 col-lg-9">
+                    <div class="article-contenido">
+                        <p>Iniciando con lo acostumbrado, el ambiente que he utilizado es <strong>GNU/Linux Debian 9 (Stretch) y Ubuntu 16.04 LTS</strong>, para realizar los ejemplos del artículo. Aunque también vale aclarar lo que es <a href="https://www.docker.com/" title="Docker">Docker</a>, antes que nada: <strong>Docker</strong> es un herramienta de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores, proporcionando una capa adicional de abstracción y automatización de Virtualización a nivel de sistema operativo en Linux.</p>
+<p><img alt="terminal" src="/theme/assets/img/docker-django.png"></p>
+<p>Aunque también existen otras definiciones más apegadas a su funcionalidad, como: <strong>Docker</strong> es una herramienta que puede empaquetar una aplicación y sus dependencias en un contenedor virtual, para ser ejecutado en cualquier servidor Linux. Esto ayuda a permitir la flexibilidad y portabilidad en donde la aplicación se puede ejecutar, ya sea en las instalaciones físicas, la nube pública, nube privada, etc.</p>
+<p>Además de esto, <strong>Django</strong> es un framework Web programado en Python, que nos ayuda y aventaja en muchas características necesarias y recurrentes al momento de trabajar aplicaciones Web. Y aunque de hecho, es una herramienta que menciono mucho en mi sitio, y una de las mejores desde mi punto de vista; e incluso me identifico mucho con su slogan: <em>con las baterias incluidas</em>.</p>
+<p>Una aclaración necesaria, es que esta configuración es para ejecutar <strong>Django</strong> en un modo de <em>desarrollo</em> o <em>pruebas</em>, dado que el uso del servidor web propio de django, nunca se ha recomendado para entornos productivos; y en ese caso sería mejor utilizar <strong>uwsgi</strong> e interconectarlo con <strong>Apache</strong> o <strong>Nginx</strong>.</p>
+<h3>Empezamos con Dockerfile y docker-compose.yml</h3>
+<p>Primero, de acuerdo al tutorial que nos proporciona el sitio oficial de Docker, creamos un par de archivos y los ejecutamos para obtener las dependencias necesarias para hacer funcionar Django adecuadamente.</p>
+<h5>Dockerfile</h5>
+<p>Con pocas variantes respecto al tutorial original de docker, separamos en dos carpetas el código (code) y los archivos estáticos o assets (html), además de indicar una carpeta para las plantillas de Django (templates), dejando el archivo como se muestra:</p>
+<div class="highlight"><pre><span></span>FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+RUN mkdir -p /var/www/website/html
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD ./example /code/
+ADD ./html /var/www/website/html
+ADD ./example/templates /var/www/website/example/templates
+</pre></div>
+
+
+<p>'example' es como he decidido nombrar el proyecto, lo vamos a revisar un poco más adelante.</p>
+<h5>docker-compose.yml</h5>
+<p>Con pocas variantes respecto al tutorial original de docker, indicamos el uso del manejador de base de datos <strong>PostgreSQL</strong> y la configuración con la que va a funcionar Django al momento de arrancar el contenedor (<em>esto es para solo un modo de pruebas o desarrollo</em>):</p>
+<div class="highlight"><pre><span></span>version: &#39;3&#39;
+services:
+  db:
+    restart: always
+    image: postgres
+  web:
+    restart: always
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8001
+    volumes:
+      - ./example:/code
+      - ./html:/var/www/website/html
+      - ./example/templates:/var/www/website/example/templates
+    ports:
+      - &quot;8001:8001&quot;
+    depends_on:
+      - db
+</pre></div>
+
+
+<h5>requirements.txt</h5>
+<p>Por último, no menos importante, pero ya casi se me olvidaba; cuando trabajamos con proyectos de <strong>Python</strong>, una buena práctica es siempre utilizar el archivo 'requirements.txt', para definir y poder indicar a cualquier otra persona los paquetes y dependencias que requerimos para poder volver a utilizar nuestro código, sin que se tenga que romper la cabeza con las dependencias, con <em>pip</em>.</p>
+<div class="highlight"><pre><span></span>Django
+psycopg2
+WeasyPrint
+djangorestframework
+</pre></div>
+
+
+<p>En este caso, lo que usualmente utilizo es Django en su versión más reciente. Aunque puedes especificar una versión en concreto de cada paquetes colocando doble igual, de esta forma '==1.8'. El paquete de <strong>pyscopg2</strong> sirve de controlador para poder conectarnos a PostgreSQL, el de <strong>WeasyPrint</strong> sirve para convertir HTML a PDF, bastante útil y pocas veces he llegado a precindir de este. Además, <strong>djangorestgramework</strong> es el mejor paquete para hacer "bien" cualquier servicio RESTful que queramos programar.</p>
+<h3>Ahora unos comandos para hacerlo funcionar</h3>
+<p>En un proyecto tradicional de Django, lo que hacemos justo después de terminar la instalación (ahora se realizará esa parte dentro del contenedor), es ejecutar el comando de startproject, <strong>recuerda hacerlo dentro de la carpeta raíz</strong> de nuestro proyecto y lo haremos de la siguiente manera:</p>
+<div class="highlight"><pre><span></span>docker-compose run web django-admin.py startproject example .
+</pre></div>
+
+
+<p>Recuerda no olvidar el <em>punto al final</em>, de lo contrario, te va a crear el comando una carpeta llamada 'example' dentro de nuetra carpeta 'example', a lo que vas a necesitar cambiar estas carpetas para que todo funcione correctamente.</p>
+<p>Tras ejecutar este comando, se realizará la instalación de todo lo necesario dentro del contenedor, dependencias y demás software. <em>Prácticamente estamos listos!</em>. <strong>No te desesperes, pues tardará un rato en terminar</strong> Tenemos que hacer una ligera corrección, dado que Docker aún sigue funcionando en algunas partes con privilegios de administrador, ahora debemos corregirlo para utilizarlo sin problemas.</p>
+<div class="highlight"><pre><span></span>chown -R <span class="nv">$USER</span>:<span class="nv">$USER</span> .
+</pre></div>
+
+
+<p>La leyenda de '$USER' es necesario que la cambies por el nombre de tu usuario; y también ejecutar estos comandos con privilegios de administrador, como <em>root</em> o con <em>sudo</em>.</p>
+<p><strong>Nota</strong>. Un punto con el que puedes recordar como realizar ciertas operaciones como <em>migrate</em>, <em>collectstatic</em> o <em>shell</em>, bastante comunes cuando se trabaja con Django, se puede realizar de la siguiente manera:</p>
+<div class="highlight"><pre><span></span>docker-compose run web python3 manage.py &lt;comando&gt;
+</pre></div>
+
+
+<p>Necesitamos configurar nuestro archivo <em>settings.py</em> con la base de datos, para poderlo hacer funcionar por completo Django. Por lo que basta agregar estas líneas en el archivo correspondiente.</p>
+<div class="highlight"><pre><span></span><span class="c1">#..</span>
+<span class="c1">#...</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;db&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="mi">5432</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">#...</span>
+<span class="c1">#..</span>
+</pre></div>
+
+
+<p><strong>Y listo!</strong>, cualquier otro comando que queramos utilizar lo usamos como antes lo mencioné. Y solo basta utilizar los comandos base de <em>docker-compose</em> para detener, arrancar o destruir nuestro contenedor con Django, <strong>happy coding...</strong>.</p>
+<h4>Fuentes:</h4>
+<ol>
+<li><a href="https://www.linux.com/news/docker-shipping-container-linux-code" title="Docker: A 'Shipping Container' for Linux Code">Docker en linux.com</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Docker_(software)" title="Docker Wiki">Docker Wiki</a></li>
+<li><a href="https://docs.docker.com/compose/django/" title="Docker Tutorial">Tutorial de Docker con Django</a></li>
+</ol>
+                    </div>
+<div class="meta align-right">
+  Publicado el <time datetime="2017-07-07T22:20:00-05:00" pubdate="pubdate">07 de julio, 2017</time>.
+  Categoria «<span class="label label-primary catego"><a href="./category/docker.html">Docker</a></span>».  
+ Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/django.html">django</a></span>, <span class="label label-success catego"><a href="./tag/docker.html">docker</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
+                        
+                    </div>
+                    <div><h4>Comentarios</h4>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = .ejecutar-django-con-docker.html;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = ejecutar-django-con-docker.html; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://davflsite.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                    </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-sx-12 col-lg-3"><br />
+<a href="/categories.html" title="Categorias y Etiquetas">Listado de Categorias y Etiquetas.</a><br />
+<div class="twitter-sidebar" id="twitter-sidebar">
+<a class="twitter-timeline" href="https://twitter.com/jelidleon"  data-tweet-limit="5">Tweets by jelidleon</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div><div class="col-md-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-sidebar2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="1367534401"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><br />                    </div>
+                </div>
+<br />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="3263070005"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                <br />
+            </div>
+        </div>
+
+<footer class="footer">
+    <div class="container">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="/author/david-leon" target="_blank" title="Más sobre mi">
+                        <i class="fa fa-info"></i> Sobre mi en la red
+                    </a>
+                </li>
+                <li>
+                    <a href="/archives.html">
+                       <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="http://blog.davfl.com.mx/" title="Blog Poeta de Ocasión" target="_blank">
+                       <i class="fa fa-heart-o"></i> d'ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="/pages/licencia.html">
+                        <i class="fa fa-cc"></i> Licencia
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright pull-right">
+            <a href="/author/david-leon">David León</a>
+        </div>
+    </div>
+</footer>    </div>
+</body>
+    <script src="./theme/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="./theme/assets/js/bootstrap.min.js"></script>
+    <script src="./theme/assets/js/material.min.js"></script>
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-23072012-2', 'auto');
+      ga('send', 'pageview');
+
+    </script></html>

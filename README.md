@@ -14,5 +14,4 @@ Github is the best way for share the content about technologies, programming and
 # Social profiles
 And about funny things, kitten or geek information i use my social networks:
 * Twitter https://twitter.com/jelidleon
-* Pinterest https://www.pinterest.com/jelidleon/
 * Tumblr https://www.tumblr.com/blog/jelid
