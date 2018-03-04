@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Sitio Web de David León - Primeros pasos con GIT</title>
+    <meta description="Publicación de noticias, tips y tutoriales de programación y tecnologías de la información" />
+    <meta name="author" content="David León">
+    <meta author="David León" />
+    <link rel="icon" href="./theme/favicon.ico">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="./theme/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/materialkit.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/main.css" rel="stylesheet"/>
+</head>
+
+<body>
+<nav class="navbar navbar-fixed-top navbar-color-on-scroll">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://davfl.com.mx/">David León</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation-example">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/archives.html">
+                        <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="https://poetadeocasion.wordpress.com/" title="Blog" target="_blank">
+                        <i class="fa fa-heart-o"></i> d'Ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="https://haridandleon.wordpress.com/" title="Entretenimiento" target="_blank">
+                        <i class="fa fa-rebel"></i> Otros
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/jelidleon" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/eisenheimjelid/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tumblr.com/blog/jelid" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-tumblr"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>    <div class="wrapper">
+        <div class="header header-filter article-head" style="background-image: url('./theme/assets/img/background.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title">Primeros pasos con GIT</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main main-raised">
+            <div class="container"><br />
+            <div class="row">
+                    <div class="col-sm-8 col-md-8 col-sx-12 col-lg-9">
+                    <div class="article-contenido">
+                        <p>Iniciando con lo acostumbrado, el ambiente que he utilizado es <strong>GNU/Linux Debian 9 (Stretch)</strong>, para realizar los ejemplos del artículo. Git es el nombre que recibe una de las herramientas más apliamente utilizadas, en el mundo de la informática y desarrollo de software; y fue desarrollada originalmente para una tarea única y enorme: <strong>Mantener y controlar el código fuente del Núcle de Linux</strong> (su kernel). Y aunque fue desarrollada principalmente para eso, para controlar código; también puede ser utilizado para un trabajo editorial, pues todo el contenido que sea texto es fácilmente enlazado para mantener un seguimiento sobre sus cambios.</p>
+<p>Aunque también se puede dar seguimiento a otro tipo de formatos o archivos que no sean texto, las herramientas al rededor de Git están enfocadas al texto; es decir, aunque podamos subir imagenes, música o audio, no es tan simple dar seguimiento a cambios en archivos multimedia, como lo es con los archivos de texto.</p>
+<p><img alt="terminal" src="/theme/assets/img/git.jpg"></p>
+<p>El principal servicio en Internet, por el cual destaca el uso de <strong>Git</strong> es precisamente el portal <strong>Github</strong>, y aunque existen muchos otros, de forma gratuita como <strong>Bitbucket</strong> o <strong>CloudForge</strong> con proyectos de código abierto, existen muchos más que se pueden usar de forma privada: <strong>Codebase</strong>, <strong>Planio</strong>, <strong>Bitbucket</strong>, y otros proyectos que te permiten tener tu propio servicio hospedado en tu infraestructura como <strong>GitLab</strong>. Existen una gran variedad de opciones, dependiendo del bolsillo, funcionalidades extra, uso y cantidad de programadores (usuarios) involucrados en el proyecto que deseas hospedar o usar en Internet.</p>
+<p>Pero todos estos servicios, existen para ser utilizados en línea, porque brindan a los usuarios caracteristicas colaborativas y facilidad de uso, además de respaldos, despliegues automatizados entre otras caracteristicas. Así que propiamente, Git es una herramienta que usa siempre de manera local y fuera de línea, por lo que no es necesario contratar ninguno de esos servicios, al menos no, hasta que veamos los beneficios adicionales que nos brindan, después de empezar a usar Git de manera diaria.</p>
+<h3>Empezamos con la instalación</h3>
+<p>Lo más sencillo, al principio, es la instalación, si haces uso de Linux como yo, ejecutar un comando nos permitirá tener instalada la versión más reciente, obviamente teniendo un repositorio en línea (o fuera de línea) disponible con todas las dependencias del paquete cumplidas, bastará con escribir:</p>
+<div class="highlight"><pre><span></span>~# apt-get install git
+</pre></div>
+
+
+<p>Si utilizas una versión basada en RedHat como Fedora, o CentOs, bastará con el siguiente comando:</p>
+<div class="highlight"><pre><span></span>~# yum install git-core
+</pre></div>
+
+
+<p>Para sistemas tipo MacOS, recomiendo utilizar Homwbrew, pues particularmente con ese sistema operativo, si bien trae una versión ya instalada y funcional, en la mayoría de los casos me ha tocado ver que es una versión vieja o modificada por el fabricante, que a mi parecer tiene unas opciones de menos o distintas a las instalaciones normales. Entonces, si lo </p>
+<h3>Ahora iniciamos el repositorio</h3>
+<p>Git es un sistema de control de versiones descentralizado, suenan a muchas palabras complicadas juntas, pero realmente es lo que es, y nada complicado. Es una herramienta que nos va a permitir saber y conocer con exactitud en que momento realizamos un cambio a nuestro código, quién lo hizo y muy importante, ya después, facilitar la colaboración y compartir nuestro código con muchos más participantes.</p>
+<p>Te recomiendo que leas a detalle el manual oficial, enlace que dejo al final del artículo. Pero para empezar, todo el concepto de control de versiones se basa en <strong>revisión</strong>, es decir, un cambio o un punto en la historia que va a guardar una versión "<em>congelada</em>" de nuestro código o proyecto. Entonces, el <strong>repositorio</strong> es el espacio que ocupa dentro de nuestra computadora todo ese historico y control de cada revisión que vamos haciendo, la facilidad de esto, es que se reduce a una simple carpeta.</p>
+<p>Cuando inicias tu repositorio, en una carpeta con tu proyecto, Git agregará una carpeta adicional llamada <strong>.git</strong>, en la cual va a guardar todo ese control, como si fuese una base de datos, que además revisa para garantizar que la integridad de cada cambio esta completo en el repositorio</p>
+<p>Entonces, ahora nos ubicamos (desde la terminal), en la carpeta de nuestro proyecto o código, donde vas a mantener el repositorio.</p>
+<div class="highlight"><pre><span></span>~$ git config user.email <span class="s2">&quot;my-email@gmail.com&quot;</span>
+~$ git config user.name <span class="s2">&quot;My Name&quot;</span>
+</pre></div>
+
+
+<p>Solo escriban su correo y su nombre, sustituyendo el contenido entre las comillas dobles, para que configuremos nuestro repositorio. Ahora bien, ¿recuerdas que te había dicho que todo se basa en la <strong>revision</strong>? pues bueno, esta revisión se debe firmar de alguna forma, y Git utiliza nuestro nombre y correo para hacerlo. Si cuando colabores con cualquier otro programador, y utiliza el mismo nombre y correo para firmar sus revisiones, no podrá hacer una distinción entre ambos autores la herramienta de Git.</p>
+<p>Es por eso que es importante realizar siempre la configuración de nuestro nombre y correo, para que exista una relación integra del autor a lo largo del repositorio.</p>
+<h3>Mi primer revisión (commit)</h3>
+<p>Es muy común, pues en este mundo de la programación, casi todo es en inglés, Git nombra a las <strong>revisiones</strong> de las que te he venido escribiendo, como <strong>commit</strong>. Solo para que sea más claro, y no existan confuciones, <em>revisión</em> = <strong>commit</strong>, son lo mismo.</p>
+<p>Bien, si iniciaste el repositorio en el punto anterior, dentro de una carpeta vacia (usualmente así inician todos los proyectos), no vas a tener ninguna revisión pendiente, hasta que hagas un cambio. Si ya tenías tu proyecto empezado desde antes, con archivos y contenido, ahora vamos a ver como agregar estos cambios y guardar nuestra primera revisión.</p>
+<p>Si no tiene contenido, basta con crear un archivo y meter un texto de ejemplo dentro del archivo.</p>
+<p>Para empezar, debemos agregar los cambios que queremos grabar en la revisón (en nuestro primer commit). Para esto, debemos ejecutar cualquiera de los dos primeros comandos que se muestran enseguida:</p>
+<div class="highlight"><pre><span></span>~$ git add --all
+~$ git add .
+~$ git commit -am <span class="s2">&quot;Init commit&quot;</span>
+</pre></div>
+
+
+<p>Ambos comandos van a agregar todos los archivos nuevos, que no se han agregado en ningún momento al repositorio. El tercer comando, lo que va a hacer, es crear nuestra revisión, o guardar propiamente nuestro commit. La opción '<em>-a</em>' recalca que queremos incluir todos los cambios pendientes, y la opción '<em>m</em>' indica que debe guardarse el commit con un mensaje, el que mismo que podemos personalizar cambiando el contenido de lo que muestro entre las comillas dobles.</p>
+<p>Cabe recalcar, que los cambios que se van a grabar en la revisión, son solo aquellos que nosotros indiquemos, con el primer comando, también podemos definir con exactitud, los cambios que deseamos agregar a la revisión; por ejemplo, si agregamos dos archivos nuevos a la carpeta, uno llamado '<em>config.txt</em>' y otro llamado '<em>config-prueba.txt</em>', y el segundo no lo queremos guardar, pues solo lo estamos usando momentaneamente, o simplemente no va a ser parte de nuestro repositorio por que es irrelebante, entonces los comandos son los siguientes:</p>
+<div class="highlight"><pre><span></span>~$ git add config.txt
+~$ git commit -m <span class="s2">&quot;Agregar el archivo config.txt&quot;</span>
+</pre></div>
+
+
+<p>Si observas el primer comando, no agrega todo, ni el punto (.) del ejemplo anterior, sin embargo si estoy agregando un nombre de archivo, que es propiamente <strong>la ruta</strong> del archivo o carpeta que vamos a agregar como nuevo o como cambio al repositorio. Y también, en el segundo comando la opción '<em>a</em>' desaparece, indicando que solo los cambios agregados por la opción '<em>add</em>' son los que se van a guardar en la revisión.</p>
+<p>El mensaje es opcional, pero una de las mejores prácticas es indicar con presición, lo que estamos haciendo; de esta forma estamos ayudando al 'yo' del futuro, cuando desee revisar que fue lo que se hizo en alguna revisión pasada, en lugar de ir revisando commit por commit.</p>
+<p>Por el momento es todo, para evitar que sea una entrega muy larga, continuaré en subsecuentes publicaciones, relatando las opciones, parámetros y diversos comandos con los que disponemos en Git.</p>
+<p>Si deseas ubicar más rápido estas publicaciones sobre Git, puedes entrar a la <a href="/categories.html" title="Categoria de Git">categoria del archivo, en la sección de Git</a>.</p>
+<h4>Fuentes:</h4>
+<ol>
+<li><a href="https://davidescudero.com/1-git-muchos-proyectos-prestashop/" title="Imagen tomada originalmente de David Escudero">Imagen de Git</a></li>
+<li><a href="https://git-scm.com/book/es/v1/Empezando" title="Manual oficial en el sitio de Git">Manual de Git Oficial</a></li>
+</ol>
+                    </div>
+<div class="meta align-right">
+  Publicado el <time datetime="2018-03-04T20:20:00-06:00" pubdate="pubdate">04 de marzo, 2018</time>.
+  Categoria «<span class="label label-primary catego"><a href="./category/git.html">Git</a></span>».  
+ Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/git.html">git</a></span>, <span class="label label-success catego"><a href="./tag/vcs.html">vcs</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
+                        
+                    </div>
+                    <div><h4>Comentarios</h4>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = .primeros-pasos-con-git.html;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = primeros-pasos-con-git.html; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://davflsite.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                    </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-sx-12 col-lg-3"><br />
+<a href="/categories.html" title="Categorias y Etiquetas">Listado de Categorias y Etiquetas.</a><br />
+<div class="twitter-sidebar" id="twitter-sidebar">
+<a class="twitter-timeline" href="https://twitter.com/jelidleon"  data-tweet-limit="5">Tweets by jelidleon</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div><div class="col-md-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-sidebar2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="1367534401"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><br />                    </div>
+                </div>
+<br />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="3263070005"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                <br />
+            </div>
+        </div>
+
+<footer class="footer">
+    <div class="container">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="/author/david-leon" target="_blank" title="Más sobre mi">
+                        <i class="fa fa-info"></i> Sobre mi en la red
+                    </a>
+                </li>
+                <li>
+                    <a href="/archives.html">
+                       <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="https://poetadeocasion.wordpress.com/" title="Blog Poeta de Ocasión" target="_blank">
+                       <i class="fa fa-heart-o"></i> d'ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="/pages/licencia.html">
+                        <i class="fa fa-cc"></i> Licencia
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright pull-right">
+            <a href="/author/david-leon">David León</a>
+        </div>
+    </div>
+</footer>    </div>
+</body>
+    <script src="./theme/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="./theme/assets/js/bootstrap.min.js"></script>
+    <script src="./theme/assets/js/material.min.js"></script>
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-23072012-2', 'auto');
+      ga('send', 'pageview');
+
+    </script></html>
