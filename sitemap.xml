@@ -5,35 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/</loc>
-<lastmod>2018-09-13T23:12:10-00:00</lastmod>
+<lastmod>2018-09-13T23:17:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/archives.html</loc>
-<lastmod>2018-09-13T23:12:10-00:00</lastmod>
+<lastmod>2018-09-13T23:17:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/tags.html</loc>
-<lastmod>2018-09-13T23:12:10-00:00</lastmod>
+<lastmod>2018-09-13T23:17:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/categories.html</loc>
-<lastmod>2018-09-13T23:12:10-00:00</lastmod>
+<lastmod>2018-09-13T23:17:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/pages/licencia.html</loc>
-<lastmod>2018-09-13T23:12:10-00:00</lastmod>
+<lastmod>2018-09-13T23:17:34-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/instalar-docker-en-centos-7.html</loc>
+<lastmod>2018-09-12T22:20:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -41,13 +48,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.davfl.com.mx/primeros-pasos-con-git.html</loc>
 <lastmod>2018-03-04T20:20:00-06:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>http://www.davfl.com.mx/instalar-docker-en-centos-7.html</loc>
-<lastmod>2017-12-09T22:20:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -96,7 +96,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/category/docker.html</loc>
-<lastmod>2017-12-09T22:20:00-06:37</lastmod>
+<lastmod>2018-09-12T22:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -116,20 +116,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/git.html</loc>
-<lastmod>2018-03-04T20:20:00-06:37</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>http://www.davfl.com.mx/tag/vcs.html</loc>
-<lastmod>2018-03-04T20:20:00-06:37</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>http://www.davfl.com.mx/tag/django.html</loc>
 <lastmod>2017-07-07T22:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
@@ -137,8 +123,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/centos.html</loc>
-<lastmod>2017-12-09T22:20:00-06:37</lastmod>
+<loc>http://www.davfl.com.mx/tag/distribuido.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/debian.html</loc>
+<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/vcs.html</loc>
+<lastmod>2018-03-04T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -158,8 +158,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/distribuido.html</loc>
-<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<loc>http://www.davfl.com.mx/tag/git.html</loc>
+<lastmod>2018-03-04T20:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -172,22 +172,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/docker.html</loc>
-<lastmod>2017-12-09T22:20:00-06:37</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>http://www.davfl.com.mx/tag/linux.html</loc>
-<lastmod>2018-03-04T20:20:00-06:37</lastmod>
+<lastmod>2018-09-12T22:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/debian.html</loc>
-<lastmod>2017-03-27T20:20:00-06:37</lastmod>
+<loc>http://www.davfl.com.mx/tag/centos.html</loc>
+<lastmod>2018-09-12T22:20:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/docker.html</loc>
+<lastmod>2018-09-12T22:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -201,7 +201,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/author/david-leon.html</loc>
-<lastmod>2018-03-04T20:20:00-06:37</lastmod>
+<lastmod>2018-09-12T22:20:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
