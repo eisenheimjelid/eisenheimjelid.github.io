@@ -17,7 +17,7 @@ Aunque también existen otras definiciones más apegadas a su funcionalidad, com
 
 Además de esto, **Django** es un framework Web programado en Python, que nos ayuda y aventaja en muchas características necesarias y recurrentes al momento de trabajar aplicaciones Web. Y aunque de hecho, es una herramienta que menciono mucho en mi sitio, y una de las mejores desde mi punto de vista; e incluso me identifico mucho con su slogan: _con las baterias incluidas_.
 
-Una aclaración necesaria, es que esta configuración es para ejecutar **Django** en un modo de _desarrollo_ o _pruebas_, dado que el uso del servidor web propio de django, nunca se ha recomendado para entornos productivos; y en ese caso sería mejor utilizar **uwsgi** e interconectarlo con **Apache** o **Nginx**.
+Una aclaración necesaria, es que esta configuración es para ejecutar **Django** en un modo de _desarrollo_ o _pruebas_, dado que el uso del servidor web propio de django, nunca se ha recomendado para entoernos productivos; y en ese caso sería mejor utilizar **uwsgi** e interconectarlo con **Apache** o **Nginx**.
 
 
 ### Empezamos con Dockerfile y docker-compose.yml
