@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import os
 
 AUTHOR = 'David León'
 SITENAME = 'Sitio Web de David León'
@@ -31,11 +32,13 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = 10
 
-PLUGIN_PATHS = ['/home/david/Proyectos/davfl/eisenheimjelid.github.io/pelican-plugins']
+PLUGIN_PATHS = [os.path.dirname(os.path.abspath(__file__)) + '/pelican-plugins']
 
 PLUGINS = ['sitemap']
+
+SITEMAP = { 'format': 'xml' }
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-THEME = '/home/david/Proyectos/davfl/eisenheimjelid.github.io/themes/davfl'
+THEME = os.path.dirname(os.path.abspath(__file__)) + '/themes/davfl'
