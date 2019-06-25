@@ -5,35 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/</loc>
-<lastmod>2019-06-12T12:17:36-00:00</lastmod>
+<lastmod>2019-06-25T12:30:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/archives.html</loc>
-<lastmod>2019-06-12T12:17:36-00:00</lastmod>
+<lastmod>2019-06-25T12:30:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/tags.html</loc>
-<lastmod>2019-06-12T12:17:36-00:00</lastmod>
+<lastmod>2019-06-25T12:30:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/categories.html</loc>
-<lastmod>2019-06-12T12:17:36-00:00</lastmod>
+<lastmod>2019-06-25T12:30:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/pages/licencia.html</loc>
-<lastmod>2019-06-12T12:17:36-00:00</lastmod>
+<lastmod>2019-06-25T12:30:24-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/clientes-http-s-curl-guzzle.html</loc>
+<lastmod>2019-06-25T13:00:00-05:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -117,7 +124,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/category/php.html</loc>
-<lastmod>2019-06-12T13:00:00-06:37</lastmod>
+<lastmod>2019-06-25T13:00:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -130,14 +137,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.davfl.com.mx/tag/mongodb.html</loc>
-<lastmod>2019-06-12T13:00:00-06:37</lastmod>
+<loc>http://www.davfl.com.mx/tag/curl.html</loc>
+<lastmod>2019-06-25T13:00:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.davfl.com.mx/tag/php.html</loc>
+<lastmod>2019-06-25T13:00:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/guzzle.html</loc>
+<lastmod>2019-06-25T13:00:00-06:37</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.davfl.com.mx/tag/mongodb.html</loc>
 <lastmod>2019-06-12T13:00:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -236,7 +257,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.davfl.com.mx/author/david-leon.html</loc>
-<lastmod>2018-03-04T20:20:00-06:37</lastmod>
+<lastmod>2019-06-25T13:00:00-06:37</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
