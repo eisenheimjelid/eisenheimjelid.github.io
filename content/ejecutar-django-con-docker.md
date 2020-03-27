@@ -128,4 +128,4 @@ DATABASES = {
 
 1. [Docker en linux.com](https://www.linux.com/news/docker-shipping-container-linux-code "Docker: A 'Shipping Container' for Linux Code")
 2. [Docker Wiki](https://es.wikipedia.org/wiki/Docker_(software) "Docker Wiki")
-2. [Tutorial de Docker con Django](https://docs.docker.com/compose/django/ "Docker Tutorial")
+3. [Tutorial de Docker con Django](https://docs.docker.com/compose/django/ "Docker Tutorial")
