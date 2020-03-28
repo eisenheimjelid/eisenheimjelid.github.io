@@ -58,6 +58,7 @@ Existen hoy en día programas como Google Maps y Google Earth, o hardware especi
 2. [AACA Museum](https://www.google.com/maps/@40.2982797,-76.6899576,3a,75y,146.61h,90t/data=!3m7!1e1!3m5!1sAF1QipOLxfeZXtpUctp4alkUdXxvo_n3jLrSBIOg63K5!2e10!3e12!7i13312!8i6656 "AACA Museum")
 3. [Buffalo Transportation Pierce Arrow Museum](https://www.google.com/maps/@42.8790072,-78.8694047,3a,75y,221.75h,83.94t/data=!3m7!1e1!3m5!1sAF1QipP16jtzs2g0kSpcUG7PbTscm3AdXq7LF_ATDR7k!2e10!3e12!7i13312!8i6656 "Buffalo Transportation Pierce Arrow Museum")
 4. [National Corvette Museum](https://www.google.com/maps/@37.0042894,-86.3753967,2a,76.7y,251.67h,85.85t/data=!3m6!1e1!3m4!1sw5jrv-Gk33ecSYGmqCEVcQ!2e0!7i13312!8i6656 "National Corvette Museum")
+4. [Petersen Automotive Museum](https://www.google.com/maps/@34.0620731,-118.3612941,2a,75y,319.97h,69.46t/data=!3m7!1e1!3m5!1shmoMomSF6XVW15_CUJ1K5A!2e0!6s%2F%2Fgeo2.ggpht.com%2Fcbk%3Fpanoid%3DhmoMomSF6XVW15_CUJ1K5A%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D66.77116%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656 "Petersen Automotive Museum")
 
 
 #### Japon
