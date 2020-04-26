@@ -69,7 +69,12 @@ Existen hoy en día programas como Google Maps y Google Earth, o hardware especi
 5. [Museo de Mazda](https://www.google.com/maps/@34.3604058,132.4830875,2a,75y,52.64h,71.4t/data=!3m6!1e1!3m4!1sNqMZAo6vJAGUCj9oFKRcyA!2e0!7i13312!8i6656 "Museo de Mazda")
 
 
-...en proceso...
+#### Egipto
+1. [Tumba de Menna](https://my.matterport.com/show/?m=vLYoS66CWp "Tumba de Menna en la Necropolis de Thebas")
+2. [Piramides de Giza](https://www.google.com/maps/about/behind-the-scenes/streetview/treks/pyramids-of-giza/ "Recorrido por las Piramides de Giza")
+
+
+
 
 
 ### Fuentes
