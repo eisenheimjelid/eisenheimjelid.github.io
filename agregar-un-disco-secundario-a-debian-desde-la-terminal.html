@@ -83,14 +83,14 @@
                         <p>Después de realizar la instalación limpia de GNU/Linux Debian, es necesario en ocasiones realizar la configuración extra de un disco duro secundario, o cuando no se configura al 100% el uso del disco duro principal durante la instalación, se configura el restante espacio libre para que se utilice en alguna ruta especial. A continuación describiré los comandos y secuencias necesarias para realizarlo.</p>
 <p><img alt="terminal" src="/theme/assets/img/terminal.png"></p>
 <h3>1. Obtener el nombre del dispositivo</h3>
-<div class="highlight"><pre><span></span><span class="c1"># fdisk -l</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># fdisk -l</span>
+</code></pre></div>
 
 
 <p>Con este comando, se listan los dispositivos conectados al equipo y que están reconocidos con los controladores correspondientes del núcleo de Linux. En caso de que no aparezca el disco duro, tendrás que revisar si esta funcionando correctamente, o revisar si el sistema tiene los controladores correctos para su dispositivo.</p>
 <p>Como observación, los comandos indicados en este paso y los suscesivos, se ejecutan con privilegios de administrador (<em>#</em>), de otra manera marcará un error.</p>
 <p>El resultado del comando es similar al siguiente, debe aparecer algo como un <em>sdb</em> u otra letra después de <em>sb</em> dependiendo de la cantidad de unidades de almacenamiento que tenga el sistema. Anota este nombre en algún otro lugar, pues es la referencia que buscamos para utilizarse como parámetro en los siguientes comandos.</p>
-<div class="highlight"><pre><span></span>Disk /dev/sda: <span class="m">298</span>.1 GiB, <span class="m">320072933376</span> bytes, <span class="m">625142448</span> sectors
+<div class="highlight"><pre><span></span><code>Disk /dev/sda: <span class="m">298</span>.1 GiB, <span class="m">320072933376</span> bytes, <span class="m">625142448</span> sectors
 Units: sectors of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
 Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: <span class="m">512</span> bytes / <span class="m">4096</span> bytes
 I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: <span class="m">4096</span> bytes / <span class="m">4096</span> bytes
@@ -112,38 +112,38 @@ Disklabel type: dos
 Disk identifier: 0xc3072e18
 
 Disk /dev/sdb doesn<span class="err">&#39;</span>t contain a valid partition table
-</pre></div>
+</code></pre></div>
 
 
 <h3>2. Escribir el particionado del disco</h3>
 <p>Ya que el dispositivo que deseamos agregar esta identificado, ejecutamos el comando <em>cfdisk</em> para poder crear las particiones que necesitemos. Una vez dentro de la utilidad, seleccionamos <em>New</em> y <em>Primary</em> para después indicar el tamaño de la partición; confirmamos la operación y le damos salir.</p>
-<div class="highlight"><pre><span></span><span class="c1"># cfdisk /dev/sdb</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># cfdisk /dev/sdb</span>
 
 &gt; New -&gt; Primary -&gt; Specify size in MB
 &gt; Write
 &gt; Quit
-</pre></div>
+</code></pre></div>
 
 
 <h3>3. Formatear la partición</h3>
 <p>Con la partición definida en el paso anterior, se procede a realizar el formateo de la misma; este comando se puede utilizar de igual forma para borrar cualquier partición definida en otro disco. En el ejemplo, realizo el formateo con <em>EXT3</em>.</p>
-<div class="highlight"><pre><span></span><span class="c1"># mkfs.ext3 /dev/sdb1</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># mkfs.ext3 /dev/sdb1</span>
+</code></pre></div>
 
 
 <h3>4. Montar la unidad en una ubicación</h3>
 <p>Se tiene que definir una ubicación para poder acceder a los archivos del nuevo disco, utilizando el comando <em>mkdir</em> seguido de un nombre, podemos ubicar el formato en cualquier ruta que descidamos. Y después montamos la unidad, indicando el formato de la partición, con la ruta de acabamos de definir, de la siguiente manera.</p>
-<div class="highlight"><pre><span></span><span class="c1"># mkdir /disk2</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># mkdir /disk2</span>
 <span class="c1"># mount -t ext3 /dev/sdb1 /disk2</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Puedes cambiar la ruta "<em>/disk2</em>" por cualquier otra que te convenga.</p>
 <h3>5. Convertimos el punto de montaje en uno permanente</h3>
 <p>Con el paso anterior, todo funcionará correctamente, pero tras un reinicio del sistema deberemos volver a realizarlo; para evitar esto y que el disco secundario siempre este disponible, sin importar que el sistema se reinicie, es necesario modificar un archivo que identificará la ruta y el dispositivo, en automático, montando la unidad y dejandola lista en todo momento.</p>
 <p>El archivo a modificar es <em>/etc/fstab/</em> con el editor de su texto plano de su preferencia (recuerde revisar los privilegios del usuario con el cual se edita), y agregamos la siguiente línea en el archivo mencionado:</p>
-<div class="highlight"><pre><span></span>/dev/sdb1 /disk2 ext3 defaults,errors<span class="o">=</span>remount-ro <span class="m">0</span> <span class="m">1</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>/dev/sdb1 /disk2 ext3 defaults,errors<span class="o">=</span>remount-ro <span class="m">0</span> <span class="m">1</span>
+</code></pre></div>
 
 
 <p>La ruta de "<em>/disk2</em>" se debe cambiar de acuerdo a la que se haya definido en el paso anterior.</p>

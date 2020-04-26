@@ -89,72 +89,72 @@
 <p>Primero, de acuerdo al tutorial que nos proporciona el sitio oficial de Docker, creamos un par de archivos y los ejecutamos para obtener las dependencias necesarias para hacer funcionar Django adecuadamente.</p>
 <h5>Dockerfile</h5>
 <p>Con pocas variantes respecto al tutorial original de docker, separamos en dos carpetas el código (code) y los archivos estáticos o assets (html), además de indicar una carpeta para las plantillas de Django (templates), dejando el archivo como se muestra:</p>
-<div class="highlight"><pre><span></span>FROM python:3
-ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-RUN mkdir -p /var/www/website/html
-WORKDIR /code
-ADD requirements.txt /code/
-RUN pip install -r requirements.txt
-ADD ./example /code/
-ADD ./html /var/www/website/html
-ADD ./example/templates /var/www/website/example/templates
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">FROM python:3</span>
+<span class="err">ENV PYTHONUNBUFFERED 1</span>
+<span class="err">RUN mkdir /code</span>
+<span class="err">RUN mkdir -p /var/www/website/html</span>
+<span class="err">WORKDIR /code</span>
+<span class="err">ADD requirements.txt /code/</span>
+<span class="err">RUN pip install -r requirements.txt</span>
+<span class="err">ADD ./example /code/</span>
+<span class="err">ADD ./html /var/www/website/html</span>
+<span class="err">ADD ./example/templates /var/www/website/example/templates</span>
+</code></pre></div>
 
 
 <p>'example' es como he decidido nombrar el proyecto, lo vamos a revisar un poco más adelante.</p>
 <h5>docker-compose.yml</h5>
 <p>Con pocas variantes respecto al tutorial original de docker, indicamos el uso del manejador de base de datos <strong>PostgreSQL</strong> y la configuración con la que va a funcionar Django al momento de arrancar el contenedor (<em>esto es para solo un modo de pruebas o desarrollo</em>):</p>
-<div class="highlight"><pre><span></span>version: &#39;3&#39;
-services:
-  db:
-    restart: always
-    image: postgres
-  web:
-    restart: always
-    build: .
-    command: python3 manage.py runserver 0.0.0.0:8001
-    volumes:
-      - ./example:/code
-      - ./html:/var/www/website/html
-      - ./example/templates:/var/www/website/example/templates
-    ports:
-      - &quot;8001:8001&quot;
-    depends_on:
-      - db
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c">version: &#39;3&#39;</span>
+<span class="c">services:</span>
+<span class="c">  db:</span>
+<span class="c">    restart: always</span>
+<span class="c">    image: postgres</span>
+<span class="c">  web:</span>
+<span class="c">    restart: always</span>
+<span class="c">    build: .</span>
+<span class="c">    command: python3 manage.py runserver 0.0.0.0:8001</span>
+<span class="c">    volumes:</span>
+<span class="c">      - ./example:/code</span>
+<span class="c">      - ./html:/var/www/website/html</span>
+<span class="c">      - ./example/templates:/var/www/website/example/templates</span>
+<span class="c">    ports:</span>
+<span class="c">      - &quot;8001:8001&quot;</span>
+<span class="c">    depends_on:</span>
+<span class="c">      - db</span>
+</code></pre></div>
 
 
 <h5>requirements.txt</h5>
 <p>Por último, no menos importante, pero ya casi se me olvidaba; cuando trabajamos con proyectos de <strong>Python</strong>, una buena práctica es siempre utilizar el archivo 'requirements.txt', para definir y poder indicar a cualquier otra persona los paquetes y dependencias que requerimos para poder volver a utilizar nuestro código, sin que se tenga que romper la cabeza con las dependencias, con <em>pip</em>.</p>
-<div class="highlight"><pre><span></span>Django
-psycopg2
-WeasyPrint
-djangorestframework
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">Django</span>
+<span class="err">psycopg2</span>
+<span class="err">WeasyPrint</span>
+<span class="err">djangorestframework</span>
+</code></pre></div>
 
 
 <p>En este caso, lo que usualmente utilizo es Django en su versión más reciente. Aunque puedes especificar una versión en concreto de cada paquetes colocando doble igual, de esta forma '==1.8'. El paquete de <strong>pyscopg2</strong> sirve de controlador para poder conectarnos a PostgreSQL, el de <strong>WeasyPrint</strong> sirve para convertir HTML a PDF, bastante útil y pocas veces he llegado a precindir de este. Además, <strong>djangorestgramework</strong> es el mejor paquete para hacer "bien" cualquier servicio RESTful que queramos programar.</p>
 <h3>Ahora unos comandos para hacerlo funcionar</h3>
 <p>En un proyecto tradicional de Django, lo que hacemos justo después de terminar la instalación (ahora se realizará esa parte dentro del contenedor), es ejecutar el comando de startproject, <strong>recuerda hacerlo dentro de la carpeta raíz</strong> de nuestro proyecto y lo haremos de la siguiente manera:</p>
-<div class="highlight"><pre><span></span>docker-compose run web django-admin.py startproject example .
-</pre></div>
+<div class="highlight"><pre><span></span><code>docker-compose run web django-admin.py startproject example .
+</code></pre></div>
 
 
 <p>Recuerda no olvidar el <em>punto al final</em>, de lo contrario, te va a crear el comando una carpeta llamada 'example' dentro de nuetra carpeta 'example', a lo que vas a necesitar cambiar estas carpetas para que todo funcione correctamente.</p>
 <p>Tras ejecutar este comando, se realizará la instalación de todo lo necesario dentro del contenedor, dependencias y demás software. <em>Prácticamente estamos listos!</em>. <strong>No te desesperes, pues tardará un rato en terminar</strong> Tenemos que hacer una ligera corrección, dado que Docker aún sigue funcionando en algunas partes con privilegios de administrador, ahora debemos corregirlo para utilizarlo sin problemas.</p>
-<div class="highlight"><pre><span></span>chown -R <span class="nv">$USER</span>:<span class="nv">$USER</span> .
-</pre></div>
+<div class="highlight"><pre><span></span><code>chown -R <span class="nv">$USER</span>:<span class="nv">$USER</span> .
+</code></pre></div>
 
 
 <p>La leyenda de '$USER' es necesario que la cambies por el nombre de tu usuario; y también ejecutar estos comandos con privilegios de administrador, como <em>root</em> o con <em>sudo</em>.</p>
 <p><strong>Nota</strong>. Un punto con el que puedes recordar como realizar ciertas operaciones como <em>migrate</em>, <em>collectstatic</em> o <em>shell</em>, bastante comunes cuando se trabaja con Django, se puede realizar de la siguiente manera:</p>
-<div class="highlight"><pre><span></span>docker-compose run web python3 manage.py &lt;comando&gt;
-</pre></div>
+<div class="highlight"><pre><span></span><code>docker-compose run web python3 manage.py &lt;comando&gt;
+</code></pre></div>
 
 
 <p>Necesitamos configurar nuestro archivo <em>settings.py</em> con la base de datos, para poderlo hacer funcionar por completo Django. Por lo que basta agregar estas líneas en el archivo correspondiente.</p>
-<div class="highlight"><pre><span></span><span class="c1">#..</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#..</span>
 <span class="c1">#...</span>
 <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -167,7 +167,7 @@ djangorestframework
 <span class="p">}</span>
 <span class="c1">#...</span>
 <span class="c1">#..</span>
-</pre></div>
+</code></pre></div>
 
 
 <p><strong>Y listo!</strong>, cualquier otro comando que queramos utilizar lo usamos como antes lo mencioné. Y solo basta utilizar los comandos base de <em>docker-compose</em> para detener, arrancar o destruir nuestro contenedor con Django, <strong>happy coding...</strong>.</p>

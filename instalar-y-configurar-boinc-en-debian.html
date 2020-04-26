@@ -89,13 +89,13 @@
 <h3>Instalar BOINC</h3>
 <p>Si usan un entorno gráfico, será mucho más sencillo, pero en mi caso he usado un servidor que utilizo para pruebas, así que <strong>no tiene un entorno de ventanas</strong>. Al instalar <strong>BOINC</strong> con el administrador es mucho más sencillo agregar los proyectos y determinar la cantidad de recursos que destinaremos a cada uno, pero les mostraré una forma quizás más complicada, pero que funciona para sistemas sin entorno de ventanas.</p>
 <p>Es necesario poder utilizar un usuario con privelegios administrativos (<strong>root</strong>), y para instalar BOINC con en entorno gráfico, ejecutamos:</p>
-<div class="highlight"><pre><span></span><span class="c1"># apt-get install boinc-client boinc-manager</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># apt-get install boinc-client boinc-manager</span>
+</code></pre></div>
 
 
 <p>Pero en nuestro caso, sin entorno gráfico, solo instalamos el cliente:</p>
-<div class="highlight"><pre><span></span><span class="c1"># apt-get install boinc-client</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># apt-get install boinc-client</span>
+</code></pre></div>
 
 
 <p>Este comando instalará BOINC, pero entiendo un poco más al respecto, realizará los siguientes pasos:</p>
@@ -108,13 +108,13 @@
 </ol>
 <p>Ahora, solo basta con reiniciar el sistema, para verificar que en efecto arranca BOINC (paso 4) sin problemas; esto nos va a permitir que aunque el sistema pierda energía electríca, o lo reiniciemos por algún motivo, vuelvea a arrancar el demonio de BOINC al arrancar nuevamente el sistema operativo.</p>
 <p>Para detener o volver a arrancar el demonio de BOINC, basta con usar el script del paso 1:</p>
-<div class="highlight"><pre><span></span><span class="c1"># /etc/init.d/boinc-client start</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/init.d/boinc-client start</span>
+</code></pre></div>
 
 
 <p>Para comprobar que el demonio esta vivo en el sistema, podemos ejecutar el siguiente comando:</p>
-<div class="highlight"><pre><span></span><span class="c1"># ps -el | grep boinc</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ps -el | grep boinc</span>
+</code></pre></div>
 
 
 <p>El resultado mostrará algo como <em>boinc_client</em>, de lo contrario, habrá que revisar los logs de la pieza de software, ubicados en /var/log/boinc. En las referencias al final del artículo, podremos buscar alguna solución.</p>
@@ -122,14 +122,14 @@
 <p>Una vez instalado <strong>BOINC</strong>, ahora necesitamos anotarnos a un proyecto al que deseemos contribuir, y puede buscar el que más sea de su agrado en: <a href="http://boinc.berkeley.edu/projects.php" title="Proyectos de Berkeley">Projects Berkeley</a>. Habrá que seguir el proceso de cada uno de los proyectos para crear una cuenta, pues requerimos el nombre de usuario y contraseña, para empezar a contribuir.</p>
 <p>Ya que contamos con nuestro usuario y contraseña, ejecutamos el comando de <strong><em>boinccmd</em></strong> con el parámetro de <em>lookup_account</em>, para obtener la llave correspondiente, para no utilizar la contraseña siempre, en su lugar, solo una clave de acceso. Después solo bastará utilizar el parámetro <em>project_attach</em> para poder iniciar el proceso y así contribuir al proyecto.</p>
 <p>Un ejemplo de lo anterior es:</p>
-<div class="highlight"><pre><span></span>$ boinccmd --lookup_account setiathome.berkeley.edu miusuario micontrasena
+<div class="highlight"><pre><span></span><code>$ boinccmd --lookup_account setiathome.berkeley.edu miusuario micontrasena
     status: Success
     poll status: operation in progress
     poll status: operation in progress
     poll status: operation in progress
     account key: 73c06fcd129df53a76e620d128943a019b072
 $ boinccmd --project_attach setiathome.berkeley.edu 73c06fcd129df53a76e620d128943a019b072
-</pre></div>
+</code></pre></div>
 
 
 <p>Este ejemplo es con el proyecto de SETI, pero depende de cada uno, nos dará una URL distinta, usualmente con el nombre del poryecto en minusculas, seguido de <em>berkeley.edu</em>, así que es un dato que debemos revisar en nuestra cuenta del proyecto, para definiar correctamente la ruta.</p>

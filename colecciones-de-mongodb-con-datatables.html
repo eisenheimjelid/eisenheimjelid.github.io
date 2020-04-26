@@ -84,7 +84,7 @@
 <p><img alt="MongoDB" src="/theme/assets/img/mongodb_logo.png"></p>
 <p>Empezando por el inicio, el código HTML que va a presentar el Datatables y el contenido de las coleciones de MongoDB, es el siguiente:</p>
 <h3>mongodb.html</h3>
-<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html&quot;</span> <span class="p">/&gt;</span>
@@ -131,12 +131,12 @@
 
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Ahora, el código que realiza el procesamiento de los datos y conecta a MongoDB es el siguiente:</p>
 <h3>mongodb.html</h3>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
 <span class="nb">set_time_limit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;memory_limit&#39;</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="p">);</span>
 <span class="nb">error_reporting</span><span class="p">(</span><span class="k">E_ALL</span><span class="p">);</span>
@@ -287,7 +287,7 @@
     <span class="nv">$output</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$finales</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="k">echo</span> <span class="s2">&quot;</span><span class="si">$input[callback]</span><span class="s2">(&quot;</span><span class="o">.</span><span class="nb">json_encode</span><span class="p">(</span> <span class="nv">$output</span> <span class="p">,</span> <span class="k">true</span><span class="p">),</span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Por último, para poder probar este ejemplo, pueden utilizar los <a href="/theme/assets/others/datatables_mongodb.json" title="Descargar datos de ejemplo JSON">datos de ejemplo</a>. Es bastante sencillo poder presentar datos desde MongoDB, con ayuda del Datatables y PHP. Espero les sea de ayuda, y cualquier duda o comentario, para eso esta la sección de abajo :D</p>

@@ -86,19 +86,19 @@
 <p>El principal requerimiento es que ambos equipos estén al alcance a través de Internet, o una red privada, es decir, la IP o dominio del equipo al que nos vamos a conectar, debe ser accesible por medio de la red, desde el equipo cliente.</p>
 <h3>Probamos la conexión de SSH</h3>
 <p>Primero, nos aseguramos de podernos conectar de forma normal al equipo remoto o servidor, desde la consola tecleando:</p>
-<div class="highlight"><pre><span></span>~$ ssh <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>~$ ssh <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
+</code></pre></div>
 
 
 <p>Nos va pedir la contraseña para concedernos el acceso, y solo tenemos 3 oportunidades, de lo contrario se cerrará el programa, hasta el próximo intento. La IP o dominio, debe ser la información del equipo remoto o servidor. Si conseguimos conectarnos con éxito, proseguimos con el siguiente paso; de lo contrario, tendremos que revisar la configuración de nuestro firewall, e inclusive en el equipo remoto, revisar los permisos de conexión.</p>
 <h3>Generar una llave local</h3>
 <p>Si es la primera vez que intentamos conectarnos a un equipo, por medio de SSH sin utilizar una contraseña, debemos generar un par de llaves, una privada y otra pública, que nos permitirá realizar la conexión. Si ya contamos con ellas, solo pasamos al siguiente punto; pero si no es así, ejecutaremos el siguiente comando:</p>
-<div class="highlight"><pre><span></span>~$ <span class="nb">cd</span> ~/.ssh
+<div class="highlight"><pre><span></span><code>~$ <span class="nb">cd</span> ~/.ssh
 ~$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;mi_correo@ejemplo.com&quot;</span>
 
 ~$ <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>ssh-agent -s<span class="k">)</span><span class="s2">&quot;</span>
 ~$ ssh-add ~/.ssh/id_rsa
-</pre></div>
+</code></pre></div>
 
 
 <p>La ubicación por defecto de las llaves generadas es <em>~/.ssh</em>, es decir, dentro de la carpeta del usuario, el subdirectorio <strong>.ssh</strong>, aunque al momento de ejecutar <strong>ssh-keygen</strong> nos pedirá la ubicación, si deseamos cambiarla en ese paso es el adecuado. Nos pedirá igualmente un <strong>passprhase</strong>, o propiamente una contraseña.</p>
@@ -107,8 +107,8 @@
 <p>Los últimos dos comandos, refrescan la cache del sistema y agregamos la llave <strong>id_rsa</strong> a la configuración de nuestro usuario. En caso de que le hayamos colocado otro nombre a la llave, debemos cambiar el nombre del archivo por que hayamos seleccionado.</p>
 <h3>Conectar SSH sin contraseña</h3>
 <p>Por último, el paso que nos faltaba para terminar la conexión de SSH a un servidor, sin necesidad de utilizar una contraseña. Una vez que contamos con nuestras llaves ya configuradas, lo que vamos a hacer es pasar la llave pública al servidor o equipo remoto al que nos queremos conectar; el contenido del archivo <strong>id_rsa.pub</strong> quedará en el servidor con el siguiente comando:</p>
-<div class="highlight"><pre><span></span>~$ ssh-copy-id -i ~/.ssh/id_rsa.pub <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>~$ ssh-copy-id -i ~/.ssh/id_rsa.pub <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
+</code></pre></div>
 
 
 <p>En caso de que no contemos con el comando <strong>ssh-copy-id</strong>, debemos conectarnos al servidor o equipo remoto, y en la ubicación siguiente, agregar el contenido del archivo <strong>id_rsa.pub</strong> (o la correspondiente llave publica) en: <strong>~/.ssh/authorized_keys</strong>.</p>
