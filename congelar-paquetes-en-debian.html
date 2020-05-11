@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
-    <title>Sitio Web de David León - Etiquetas</title>
+    <title>Sitio Web de David León - Congelar paquetes en Debian</title>
     <meta description="Publicación de noticias, tips y tutoriales de programación y tecnologías de la información" />
     <meta name="author" content="David León">
     <meta author="David León" />
@@ -66,64 +66,89 @@
         </div>
     </div>
 </nav>    <div class="wrapper">
-<div class="header header-filter article-head" style="background-image: url('./theme/assets/img/background.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10">
-                    <h1 class="title">Etiquetas</h1>
-                    <p>Clasificación del contenido.</p>
+        <div class="header header-filter article-head" style="background-image: url('./theme/assets/img/background.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title">Congelar paquetes en Debian</h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="main main-raised">
-        <div class="container"><br />
-        <div class="row">
-            <div class="col-sm-8 col-md-8 col-sx-12 col-lg-9">
-              <h2 class="page_title">Etiquetas</h2>
-                <ul id="tag_list" class="catlist">
-                    <li class="label label-success"><a href="./tag/linux.html">linux</a></li>
-                    <li class="label label-success"><a href="./tag/terminal.html">terminal</a></li>
-                    <li class="label label-success"><a href="./tag/bash.html">bash</a></li>
-                    <li class="label label-success"><a href="./tag/apt.html">apt</a></li>
-                    <li class="label label-success"><a href="./tag/dpkg.html">dpkg</a></li>
-                    <li class="label label-success"><a href="./tag/commandos.html">commandos</a></li>
-                    <li class="label label-success"><a href="./tag/respaldo.html">respaldo</a></li>
-                    <li class="label label-success"><a href="./tag/base-de-datos.html">base de datos</a></li>
-                    <li class="label label-success"><a href="./tag/db.html">db</a></li>
-                    <li class="label label-success"><a href="./tag/postgresql.html">postgresql</a></li>
-                    <li class="label label-success"><a href="./tag/docker.html">docker</a></li>
-                    <li class="label label-success"><a href="./tag/coronavirus.html">coronavirus</a></li>
-                    <li class="label label-success"><a href="./tag/covid-19.html">covid-19</a></li>
-                    <li class="label label-success"><a href="./tag/virtual.html">virtual</a></li>
-                    <li class="label label-success"><a href="./tag/curl.html">curl</a></li>
-                    <li class="label label-success"><a href="./tag/php.html">php</a></li>
-                    <li class="label label-success"><a href="./tag/guzzle.html">guzzle</a></li>
-                    <li class="label label-success"><a href="./tag/mongodb.html">mongodb</a></li>
-                    <li class="label label-success"><a href="./tag/datatables.html">datatables</a></li>
-                    <li class="label label-success"><a href="./tag/git.html">git</a></li>
-                    <li class="label label-success"><a href="./tag/vcs.html">vcs</a></li>
-                    <li class="label label-success"><a href="./tag/centos.html">centos</a></li>
-                    <li class="label label-success"><a href="./tag/django.html">django</a></li>
-                    <li class="label label-success"><a href="./tag/keys.html">keys</a></li>
-                    <li class="label label-success"><a href="./tag/conexion.html">conexion</a></li>
-                    <li class="label label-success"><a href="./tag/debian.html">debian</a></li>
-                    <li class="label label-success"><a href="./tag/distribuido.html">distribuido</a></li>
-                </ul>
-              <h2 class="page_title">Categorías</h2>
-                <ul id="tag_list" class="catlist">
-                    <li class="label label-primary"><a href="./category/boinc.html">BOINC</a></li>
-                    <li class="label label-primary"><a href="./category/debian.html">Debian</a></li>
-                    <li class="label label-primary"><a href="./category/docker.html">Docker</a></li>
-                    <li class="label label-primary"><a href="./category/git.html">Git</a></li>
-                    <li class="label label-primary"><a href="./category/php.html">Php</a></li>
-                    <li class="label label-primary"><a href="./category/postgresql.html">Postgresql</a></li>
-                    <li class="label label-primary"><a href="./category/social.html">Social</a></li>
-                    <li class="label label-primary"><a href="./category/ssh.html">SSH</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-4 col-md-4 col-sx-12 col-lg-3">
-            <br />
+        <div class="main main-raised">
+            <div class="container"><br />
+            <div class="row">
+                    <div class="col-sm-8 col-md-8 col-sx-12 col-lg-9">
+                    <div class="article-contenido">
+                        <p>La última ocasión que intenté actualizar un sistema operativo en producción, por aquello de los certificados de seguridad, parches de los paquetes y demás actualizaciones importantes; ¡todo murió! y es que no sé si alguien ha intentado actualizar <code>docker-ce</code> en producción, reinicia y pierde la referencias a muchos contenedores, por lo que es necesario volver a construilos ... ¡datos perdidos!</p>
+<p><img alt="terminal" src="/theme/assets/img/apt-get-purge-windows.png"></p>
+<h3>1. Congelar un paquete con dpkg</h3>
+<p>Para aquellos administradores o usuarios versados en el mundo <code>Debian Like</code>, <strong>dpkg</strong> es un programa básico, cuando por algún momento <strong>apt-get</strong> no esta funcionando bien, o instalando paquetes fuera de los repositorios oficiales, es necesario conocer su uso, pero para el objetivo de este artículo, vamos a ocupar este programa para bloquear/congelar un paquete, y aunque existan actualizaciones disponibles, no se va a mover ni un solo archivo.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;&lt;nombre-de-paquete&gt; hold&quot;</span> <span class="p">|</span> dpkg --set-selections
+
+<span class="nb">echo</span> <span class="s2">&quot;&lt;nombre-de-paquete&gt; install&quot;</span> <span class="p">|</span> dpkg --set-selections
+
+dpkg --get-selections
+
+dpkg --get-selections <span class="p">|</span> grep <span class="s2">&quot;&lt;nombre-de-paquete&gt;&quot;</span>
+</code></pre></div>
+
+
+<p>Importante, cada uno de estos comandos, se ejecuta con privilegios de administración, anteponiendo <code>sudo</code> en caso de trabajar con Ubuntu, o <code>sudo su</code> como primer comando. La segunda línea te permite desactivar el 'bloqueo', por si ya no necesitas tener congelado el paquete, y si requieres su instalación o actualización. El resto de los paquetes son variantes para poder consultar el nombre exacto que tienen los paquetes, y su estatus.</p>
+<h3>2. Congelar un paquete con apt</h3>
+<p>El en mundo de Ubuntu es muy normal, hoy en día utilizar solo <code>apt</code>, y aunque no es un dpkg es una herramienta muy potente. Ahora bien, con apt, tenemos que ejecutar los siguiente comandos.</p>
+<div class="highlight"><pre><span></span><code>sudo apt-mark hold &lt;nombre-de-paquete&gt;
+
+sudo apt-mark unhold &lt;nombre-de-paquete&gt;
+
+sudo apt-mark showhold
+</code></pre></div>
+
+
+<p>De nuevo, la segunda línea es para poner el ejemplo, de cómo desactivar el bloqueo al paquete para poder instalar sus actualizaciones. Y la última línea te permite consultar un listado, con los paquetes bloqueados en el sistema.</p>
+<h3>3. Congelar un paquete con aptitude</h3>
+<p>También contamos con <code>aptitude</code>, otra excelente herramienta para manejar los paquetes instalados en el sistema operativo, y la forma de hacerlo es la siguiente:</p>
+<div class="highlight"><pre><span></span><code>sudo aptitude hold &lt;nombre-de-paquete&gt;
+
+sudo aptitude unhold &lt;nombre-de-paquete&gt;
+</code></pre></div>
+
+
+<p><strong>Y listo!</strong>, así de fácil podemos ahorranos muchos problemas, al momento de hacer actualizaciones en sistemas operativos basados en Debian. Evitando que se actualicen programas problematicos, como puede llegar a ser <code>docker-ce</code>.</p>
+<h4>Fuentes:</h4>
+<ol>
+<li><a href="hhttps://askubuntu.com/questions/18654/how-to-prevent-updating-of-a-specific-package" title="How to prevent updating of a specific package?">Ayuda en Askubuntu</a></li>
+</ol>
+                    </div>
+<div class="meta align-right">
+  Publicado el <time datetime="2020-05-10T19:50:00-05:00" pubdate="pubdate">10 de May, 2020</time>.
+  Categoria «<span class="label label-primary catego"><a href="./category/debian.html">Debian</a></span>».  
+ Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/terminal.html">terminal</a></span>, <span class="label label-success catego"><a href="./tag/bash.html">bash</a></span>, <span class="label label-success catego"><a href="./tag/apt.html">apt</a></span>, <span class="label label-success catego"><a href="./tag/dpkg.html">dpkg</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
+                        
+                    </div>
+                    <div><h4>Comentarios</h4>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = .congelar-paquetes-en-debian.html;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = congelar-paquetes-en-debian.html; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://davflsite.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                    </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-sx-12 col-lg-3"><br />
 <a href="/categories.html" title="Categorias y Etiquetas">Listado de Categorias y Etiquetas.</a><br />
 <div class="twitter-sidebar" id="twitter-sidebar">
 <a class="twitter-timeline" href="https://twitter.com/jelidleon"  data-tweet-limit="5">Tweets by jelidleon</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -138,8 +163,8 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-</div><br />            </div>
-        </div>
+</div><br />                    </div>
+                </div>
 <br />
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- www.DAVFL-footer -->
@@ -150,9 +175,9 @@
      data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
-</script>        <br />
+</script>                <br />
+            </div>
         </div>
-    </div>
 
 <footer class="footer">
     <div class="container">
