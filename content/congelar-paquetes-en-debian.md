@@ -1,5 +1,5 @@
 Title: Congelar paquetes en Debian
-Date: 2017-03-24 20:20
+Date: 2020-05-10 19:50
 Category: Debian
 Tags: linux,terminal,bash,apt,dpkg
 Slug: congelar-paquetes-en-debian
