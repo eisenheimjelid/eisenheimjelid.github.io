@@ -84,35 +84,32 @@
 <p><img alt="terminal" src="/theme/assets/img/apt-get-purge-windows.png"></p>
 <h3>1. Congelar un paquete con dpkg</h3>
 <p>Para aquellos administradores o usuarios versados en el mundo <code>Debian Like</code>, <strong>dpkg</strong> es un programa básico, cuando por algún momento <strong>apt-get</strong> no esta funcionando bien, o instalando paquetes fuera de los repositorios oficiales, es necesario conocer su uso, pero para el objetivo de este artículo, vamos a ocupar este programa para bloquear/congelar un paquete, y aunque existan actualizaciones disponibles, no se va a mover ni un solo archivo.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;&lt;nombre-de-paquete&gt; hold&quot;</span> <span class="p">|</span> dpkg --set-selections
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;nombre-de-paquete&gt; hold&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dpkg<span class="w"> </span>--set-selections
 
-<span class="nb">echo</span> <span class="s2">&quot;&lt;nombre-de-paquete&gt; install&quot;</span> <span class="p">|</span> dpkg --set-selections
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;nombre-de-paquete&gt; install&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>dpkg<span class="w"> </span>--set-selections
 
-dpkg --get-selections
+dpkg<span class="w"> </span>--get-selections
 
-dpkg --get-selections <span class="p">|</span> grep <span class="s2">&quot;&lt;nombre-de-paquete&gt;&quot;</span>
+dpkg<span class="w"> </span>--get-selections<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;&lt;nombre-de-paquete&gt;&quot;</span>
 </code></pre></div>
-
 
 <p>Importante, cada uno de estos comandos, se ejecuta con privilegios de administración, anteponiendo <code>sudo</code> en caso de trabajar con Ubuntu, o <code>sudo su</code> como primer comando. La segunda línea te permite desactivar el 'bloqueo', por si ya no necesitas tener congelado el paquete, y si requieres su instalación o actualización. El resto de los paquetes son variantes para poder consultar el nombre exacto que tienen los paquetes, y su estatus.</p>
 <h3>2. Congelar un paquete con apt</h3>
 <p>El en mundo de Ubuntu es muy normal, hoy en día utilizar solo <code>apt</code>, y aunque no es un dpkg es una herramienta muy potente. Ahora bien, con apt, tenemos que ejecutar los siguiente comandos.</p>
-<div class="highlight"><pre><span></span><code>sudo apt-mark hold &lt;nombre-de-paquete&gt;
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-mark<span class="w"> </span>hold<span class="w"> </span>&lt;nombre-de-paquete&gt;
 
-sudo apt-mark unhold &lt;nombre-de-paquete&gt;
+sudo<span class="w"> </span>apt-mark<span class="w"> </span>unhold<span class="w"> </span>&lt;nombre-de-paquete&gt;
 
-sudo apt-mark showhold
+sudo<span class="w"> </span>apt-mark<span class="w"> </span>showhold
 </code></pre></div>
-
 
 <p>De nuevo, la segunda línea es para poner el ejemplo, de cómo desactivar el bloqueo al paquete para poder instalar sus actualizaciones. Y la última línea te permite consultar un listado, con los paquetes bloqueados en el sistema.</p>
 <h3>3. Congelar un paquete con aptitude</h3>
 <p>También contamos con <code>aptitude</code>, otra excelente herramienta para manejar los paquetes instalados en el sistema operativo, y la forma de hacerlo es la siguiente:</p>
-<div class="highlight"><pre><span></span><code>sudo aptitude hold &lt;nombre-de-paquete&gt;
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>aptitude<span class="w"> </span>hold<span class="w"> </span>&lt;nombre-de-paquete&gt;
 
-sudo aptitude unhold &lt;nombre-de-paquete&gt;
+sudo<span class="w"> </span>aptitude<span class="w"> </span>unhold<span class="w"> </span>&lt;nombre-de-paquete&gt;
 </code></pre></div>
-
 
 <p><strong>Y listo!</strong>, así de fácil podemos ahorranos muchos problemas, al momento de hacer actualizaciones en sistemas operativos basados en Debian. Evitando que se actualicen programas problematicos, como puede llegar a ser <code>docker-ce</code>.</p>
 <h4>Fuentes:</h4>
@@ -121,7 +118,7 @@ sudo aptitude unhold &lt;nombre-de-paquete&gt;
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2020-05-10T19:50:00-05:00" pubdate="pubdate">10 de May, 2020</time>.
+  Publicado el <time datetime="2020-05-10T19:50:00-05:00" pubdate="pubdate">10 de mayo, 2020</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/debian.html">Debian</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/terminal.html">terminal</a></span>, <span class="label label-success catego"><a href="./tag/bash.html">bash</a></span>, <span class="label label-success catego"><a href="./tag/apt.html">apt</a></span>, <span class="label label-success catego"><a href="./tag/dpkg.html">dpkg</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -215,13 +212,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

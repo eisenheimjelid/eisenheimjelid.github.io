@@ -86,20 +86,18 @@
 <p>El principal requerimiento es que ambos equipos estén al alcance a través de Internet, o una red privada, es decir, la IP o dominio del equipo al que nos vamos a conectar, debe ser accesible por medio de la red, desde el equipo cliente.</p>
 <h3>Probamos la conexión de SSH</h3>
 <p>Primero, nos aseguramos de podernos conectar de forma normal al equipo remoto o servidor, desde la consola tecleando:</p>
-<div class="highlight"><pre><span></span><code>~$ ssh <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span>ssh<span class="w"> </span><span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
 </code></pre></div>
-
 
 <p>Nos va pedir la contraseña para concedernos el acceso, y solo tenemos 3 oportunidades, de lo contrario se cerrará el programa, hasta el próximo intento. La IP o dominio, debe ser la información del equipo remoto o servidor. Si conseguimos conectarnos con éxito, proseguimos con el siguiente paso; de lo contrario, tendremos que revisar la configuración de nuestro firewall, e inclusive en el equipo remoto, revisar los permisos de conexión.</p>
 <h3>Generar una llave local</h3>
 <p>Si es la primera vez que intentamos conectarnos a un equipo, por medio de SSH sin utilizar una contraseña, debemos generar un par de llaves, una privada y otra pública, que nos permitirá realizar la conexión. Si ya contamos con ellas, solo pasamos al siguiente punto; pero si no es así, ejecutaremos el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>~$ <span class="nb">cd</span> ~/.ssh
-~$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;mi_correo@ejemplo.com&quot;</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/.ssh
+~$<span class="w"> </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;mi_correo@ejemplo.com&quot;</span>
 
-~$ <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>ssh-agent -s<span class="k">)</span><span class="s2">&quot;</span>
-~$ ssh-add ~/.ssh/id_rsa
+~$<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span>
+~$<span class="w"> </span>ssh-add<span class="w"> </span>~/.ssh/id_rsa
 </code></pre></div>
-
 
 <p>La ubicación por defecto de las llaves generadas es <em>~/.ssh</em>, es decir, dentro de la carpeta del usuario, el subdirectorio <strong>.ssh</strong>, aunque al momento de ejecutar <strong>ssh-keygen</strong> nos pedirá la ubicación, si deseamos cambiarla en ese paso es el adecuado. Nos pedirá igualmente un <strong>passprhase</strong>, o propiamente una contraseña.</p>
 <p>En este paso, es importante aclarar, que <strong>si deseamos automatizar tareas entre ambos equipos, es necesario dejar en blanco este paso</strong>; es decir, no introducir una contraseña. Por seguridad lo solicita, dado que esta llave evitará que el equipo remoto solicite la contraseña del usuario con el que nos conectamos, y en favor utilizará esta llave encriptada; es necesario que también este asegurada esta llave, detrás de una contraseña.</p>
@@ -107,9 +105,8 @@
 <p>Los últimos dos comandos, refrescan la cache del sistema y agregamos la llave <strong>id_rsa</strong> a la configuración de nuestro usuario. En caso de que le hayamos colocado otro nombre a la llave, debemos cambiar el nombre del archivo por que hayamos seleccionado.</p>
 <h3>Conectar SSH sin contraseña</h3>
 <p>Por último, el paso que nos faltaba para terminar la conexión de SSH a un servidor, sin necesidad de utilizar una contraseña. Una vez que contamos con nuestras llaves ya configuradas, lo que vamos a hacer es pasar la llave pública al servidor o equipo remoto al que nos queremos conectar; el contenido del archivo <strong>id_rsa.pub</strong> quedará en el servidor con el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>~$ ssh-copy-id -i ~/.ssh/id_rsa.pub <span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w"> </span><span class="o">[</span>usuario<span class="o">]</span>@<span class="o">[</span>ip_o_dominio<span class="o">]</span>
 </code></pre></div>
-
 
 <p>En caso de que no contemos con el comando <strong>ssh-copy-id</strong>, debemos conectarnos al servidor o equipo remoto, y en la ubicación siguiente, agregar el contenido del archivo <strong>id_rsa.pub</strong> (o la correspondiente llave publica) en: <strong>~/.ssh/authorized_keys</strong>.</p>
 <p>Esto último, dado que el comando <strong>ssh-copy-id</strong> no siempre esta presente con la instalación de OpenSSH. Y con esto, ya solo falta probar, realizando el primer paso de este artículo, y ahora ya no nos pedirá contraseña para conectarnos.</p>
@@ -120,7 +117,7 @@
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2017-04-17T22:20:00-05:00" pubdate="pubdate">17 de April, 2017</time>.
+  Publicado el <time datetime="2017-04-17T22:20:00-05:00" pubdate="pubdate">17 de abril, 2017</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/ssh.html">SSH</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/keys.html">keys</a></span>, <span class="label label-success catego"><a href="./tag/conexion.html">conexion</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -214,13 +211,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

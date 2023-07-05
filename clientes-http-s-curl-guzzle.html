@@ -92,19 +92,16 @@
 <p>Guzzle es un cliente HTTP/S de PHP que facilita el envío de solicitudes HTTP y la integración sencilla con los servicios web. A diferencia de curl, Guzzle solo hace peticiones a HTTP/S, y no considera peticiones bajo algún otro protocolo. Es necesario instalar este cliente por medio de <a href="http://getcomposer.org">Composer</a> (es lo recomendado):</p>
 <h3>Instalar Guzzle</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Instalar Composer</span>
-curl -sS https://getcomposer.org/installer <span class="p">|</span> php
+curl<span class="w"> </span>-sS<span class="w"> </span>https://getcomposer.org/installer<span class="w"> </span><span class="p">|</span><span class="w"> </span>php
 </code></pre></div>
-
 
 <p>Después, correr el comando de composer para instalar la versión última estable de Guzzle:</p>
-<div class="highlight"><pre><span></span><code>php composer.phar require guzzlehttp/guzzle
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>composer.phar<span class="w"> </span>require<span class="w"> </span>guzzlehttp/guzzle
 </code></pre></div>
-
 
 <p>Después, es necesario agregar el autoloader de Composer al código:</p>
 <div class="highlight"><pre><span></span><code><span class="x">require &#39;vendor/autoload.php&#39;;</span>
 </code></pre></div>
-
 
 <h2>Ejemplos practicos de Curl y Guzzle</h2>
 <p>Para la charla que preparé con este tema, preparé algunos ejemplos que pueden consultar en el <a href="https://github.com/phpwaymx/curlguzzle" title="Repositorio con el código de ejemplo">repositorio de github</a>, y que explico a grandes rasgos, aquí mismo:</p>
@@ -131,7 +128,7 @@ curl -sS https://getcomposer.org/installer <span class="p">|</span> php
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2019-06-25T13:00:00-05:00" pubdate="pubdate">25 de June, 2019</time>.
+  Publicado el <time datetime="2019-06-25T13:00:00-05:00" pubdate="pubdate">25 de junio, 2019</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/php.html">Php</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/curl.html">curl</a></span>, <span class="label label-success catego"><a href="./tag/php.html">php</a></span>, <span class="label label-success catego"><a href="./tag/guzzle.html">guzzle</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -225,13 +222,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

@@ -85,56 +85,51 @@
 <p><img alt="postgresql" src="/theme/assets/img/postgresql.jpg"></p>
 <h3>Crear un respaldo de la base de datos</h3>
 <p>Para poder exportar la estructura de tablas, columnas, permisos, roles y datos de una base en Postgresql (v9+), tenemos que ocupar el comando <code>pg_dump</code>, con ciertos parámetros, y guardar el resultado en un archivo de texto plano con extensión .sql.</p>
-<div class="highlight"><pre><span></span><code>~# dg_dump -U mi-usuario -d mi-bd -p <span class="m">5433</span> &gt; mi-export.sql
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>dg_dump<span class="w"> </span>-U<span class="w"> </span>mi-usuario<span class="w"> </span>-d<span class="w"> </span>mi-bd<span class="w"> </span>-p<span class="w"> </span><span class="m">5433</span><span class="w"> </span>&gt;<span class="w"> </span>mi-export.sql
 </code></pre></div>
-
 
 <p>Con el parámetro <strong>-U</strong> especificamos el nombre del usuario con el cual nos estamos conectando a la base de datos; con el parámetro <strong>-d</strong> indicamos el nombre de la base de datos a exportar; con el parámetro <strong>-p</strong> especificamos el puerto, en caso de que sea uno distinto al default <strong>5432</strong>; y por último, el nombre del archivo en el que se va a guardar el contenido exportado.</p>
 <h3>Crear un respaldo completo de toda la base de datos</h3>
 <p>En ocasiones, necesitamos exportar más de una base de datos que exista en el manejador, y el método anterior, tendría que repetirse tantas veces, como bases de datos queramos exportar. Así que para poder exportar, por completo, todas las estructuraa de tablas, columnas, permisos, roles y datos de cada base en Postgresql (v9+), tenemos que ocupar el comando <code>pg_dump_all</code>, con ciertos parámetros, y guardar el resultado en un archivo de texto plano con extensión .sql.</p>
-<div class="highlight"><pre><span></span><code>~# dg_dump -U mi-usuario -p <span class="m">5433</span> &gt; mi-export-all.sql
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>dg_dump<span class="w"> </span>-U<span class="w"> </span>mi-usuario<span class="w"> </span>-p<span class="w"> </span><span class="m">5433</span><span class="w"> </span>&gt;<span class="w"> </span>mi-export-all.sql
 </code></pre></div>
-
 
 <p>Con el parámetro <strong>-U</strong> especificamos el nombre del usuario con el cual nos estamos conectando a la base de datos; con el parámetro <strong>-p</strong> especificamos el puerto, en caso de que sea uno distinto al default <strong>5432</strong>; y por último, el nombre del archivo en el que se va a guardar el contenido exportado.</p>
 <h3>Restaurar un respaldo de la base de datos</h3>
 <p>Para poder restaurar la estructura de tablas, columnas, permisos, roles y datos de una base en Postgresql (v9+), tenemos que ocupar el comando <code>psql</code>, con ciertos parámetros, consultando el contenido de la base de datos a resutarar, desde un archivo de texto plano con extensión .sql.</p>
-<div class="highlight"><pre><span></span><code>~# cat mi-export.sql <span class="p">|</span> psql -U mi-usuario -p <span class="m">5433</span>
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>cat<span class="w"> </span>mi-export.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>mi-usuario<span class="w"> </span>-p<span class="w"> </span><span class="m">5433</span>
 </code></pre></div>
-
 
 <p>Con el parámetro <strong>-U</strong> especificamos el nombre del usuario con el cual nos estamos conectando a la base de datos; con el parámetro <strong>-p</strong> especificamos el puerto, en caso de que sea uno distinto al default <strong>5432</strong>; y por último, el nombre del archivo que cuenta con el respaldo de la base de datos, para ser importado al manejador.</p>
 <h3>Restaurar una base de datos con otro nombre</h3>
 <p>En ocasiones, tenemos un ambiente de pruebas y uno de producción, con dos manejadores de Psotgresql distintos; y necesitamos exportar la base de pruebas ya lista, que tiene el nombre <code>lista-para-prod</code>, y mandarla al manejador en producción con el nombre <code>mi-sistema</code> (o cualquier nombre distinto). Entonces se vuelve algo complicado, dado que el archivo exportado en un inicio, amarra la estructura, roles, permisos y demás con el nombre original de la base de datos, así que si decidimos importar el archivo .sql en el nuevo manejador con el mismo archivo, no va surtir efecto en la base que deseamos, si no que va a crear una nueva, con el mismo nombre que la anterior.</p>
 <p>Pero eso no es lo que queremos hacer, deseamos tener la base de datos <code>lista-para-prod</code> en <code>mi-sistema</code>, con los nombres de <code>mi-sistema</code> y no los originales. Entonces, utilizamos el método más rápido, creamos una base de datos con el nuevo nombre, el manejador original y lo exportamos, así el archivo resultante tendrá el nuevo nombre, y en el nuevo manejar, simplemente lo restauramos como si nada pasara.</p>
-<div class="highlight"><pre><span></span><code>~# createdb -U mi-usuario -T lista-para-prod mi-sistema
-~# pg_dump -U mi-usuario -d mi-sistema -p <span class="m">5433</span> &gt; mi-sistema.sql
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>createdb<span class="w"> </span>-U<span class="w"> </span>mi-usuario<span class="w"> </span>-T<span class="w"> </span>lista-para-prod<span class="w"> </span>mi-sistema
+~#<span class="w"> </span>pg_dump<span class="w"> </span>-U<span class="w"> </span>mi-usuario<span class="w"> </span>-d<span class="w"> </span>mi-sistema<span class="w"> </span>-p<span class="w"> </span><span class="m">5433</span><span class="w"> </span>&gt;<span class="w"> </span>mi-sistema.sql
 .
 .
 .
-~# cat mi-sistema.sql <span class="p">|</span> psql -U mi-servidor -d mi-sistema -p <span class="m">5433</span>
+~#<span class="w"> </span>cat<span class="w"> </span>mi-sistema.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>mi-servidor<span class="w"> </span>-d<span class="w"> </span>mi-sistema<span class="w"> </span>-p<span class="w"> </span><span class="m">5433</span>
 </code></pre></div>
-
 
 <p>El primer comando, hace la diferencia, porque creamos una base de datos con un nuevo nombre, tomando de base la ya existente; con el parámetro <strong>-T</strong> indicamos que deseamos crear una base de datos usando de plantilla (template) otra base, que en este caso, es la original. Una ves hecho eso, ya usamos lo que conocemos, y exportamos la nueva base, con el nuevo nombre, movemos el archivo y lo cargamos en el otro manejador, para poder restaurarla con el otro comando.</p>
 <h3>Respaldar/Restaurar una base de datos en Docker</h3>
 <p>Algo que también he estado haciendo mucho, es perder datos en Docker, ¿no les ha ocurrido que actualizan el paquete <code>docker-ce</code> en su sistema operativo y se pierden los contenedores? Pues que suerte si no; pero a mi, me ha ocurrido al menos un par de ocasiones, en donde, después de actualizar <code>docker-ce</code> desde <code>apt-get upgrade -y</code> ´la instalación de docker, reinicia la carpeta <code>/var/lib/docker</code> que es la ruta por defecto, para guardar los contenedores; así que al levantar el servicio actualizado de docker, <strong>¡adios!</strong> ya no existen los viejos contenedores. Y no es que los borre, creo que limpia algunos registros y pierde la referencia de los contenedores, así que al querer iniciar de nuevo tu viejo contenedor, aparecerá algun error de una referencia borrada, no encontrada o algo parecido.</p>
 <p>Así que podemos optar por dos esquemas: el primero, hacemos persistentes en el sistema de archivos la carpeta de datos de postgresql, o segundo, implementamos un esquema de respaldos, para poder exportar la base de datos en un archivo .sql, garantizando siempre tener un respaldo en otra ubicación, y nunca dentro del contenedor ... que tarde que temprano, puede ser eliminado.</p>
 <p>Este segundo esquema, es el que a mi parecer, es mejor, bajo el supuesto de que tus contenedores guarden información importante y se encuentren bajo un uso productivo, es decir, que si lo pierdes, te metes en buenos líos!. Así que lo que tendríamos que hacer, es generar el respaldo de Postgresql, desde fuera del contenedor, hacía el sistema de archivos, y bajo cualquier otro esquema de respaldo, mover ese archivo a otra ubicación segura; de la siguiente manera.</p>
-<div class="highlight"><pre><span></span><code>~# docker <span class="nb">exec</span> -t your-db-container pg_dumpall -c -U postgres &gt; dump_<span class="sb">`</span>date +%d-%m-%Y<span class="s2">&quot;_&quot;</span>%H_%M_%S<span class="sb">`</span>.sql
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-t<span class="w"> </span>your-db-container<span class="w"> </span>pg_dumpall<span class="w"> </span>-c<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>&gt;<span class="w"> </span>dump_<span class="sb">`</span>date<span class="w"> </span>+%d-%m-%Y<span class="s2">&quot;_&quot;</span>%H_%M_%S<span class="sb">`</span>.sql
 .
 .
 .
-~ <span class="c1"># cat your_dump.sql | docker exec -i your-db-container psql -U postgres</span>
+~<span class="w"> </span><span class="c1"># cat your_dump.sql | docker exec -i your-db-container psql -U postgres</span>
 </code></pre></div>
-
 
 <p>Por el momento, hasta aquí queda este pequeño recordatorio de como exportar/importar bases de datos, desde el manejador de PostgreSQL. ¡Gracias! y nos vemos la próxima.</p>
 <h3>Fuentes</h3>
 <p>Puedo mencionar la documentación y manuales, en el sitio oficial de Postgresql, pero creo que es la referencia básica en cualquier punto relacionado a este manejador de base de datos; pero realmente, es experiencia propia, y varios años administrando bases de datos. </p>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2020-04-26T16:20:00-05:00" pubdate="pubdate">26 de April, 2020</time>.
+  Publicado el <time datetime="2020-04-26T16:20:00-05:00" pubdate="pubdate">26 de abril, 2020</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/postgresql.html">Postgresql</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/commandos.html">commandos</a></span>, <span class="label label-success catego"><a href="./tag/respaldo.html">respaldo</a></span>, <span class="label label-success catego"><a href="./tag/base-de-datos.html">base de datos</a></span>, <span class="label label-success catego"><a href="./tag/db.html">db</a></span>, <span class="label label-success catego"><a href="./tag/postgresql.html">postgresql</a></span>, <span class="label label-success catego"><a href="./tag/docker.html">docker</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -228,13 +223,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

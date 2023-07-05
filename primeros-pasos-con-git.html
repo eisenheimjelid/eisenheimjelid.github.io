@@ -87,14 +87,12 @@
 <p>Pero todos estos servicios, existen para ser utilizados en línea, porque brindan a los usuarios caracteristicas colaborativas y facilidad de uso, además de respaldos, despliegues automatizados entre otras caracteristicas. Así que propiamente, Git es una herramienta que usa siempre de manera local y fuera de línea, por lo que no es necesario contratar ninguno de esos servicios, al menos no, hasta que veamos los beneficios adicionales que nos brindan, después de empezar a usar Git de manera diaria.</p>
 <h3>Empezamos con la instalación</h3>
 <p>Lo más sencillo, al principio, es la instalación, si haces uso de Linux como yo, ejecutar un comando nos permitirá tener instalada la versión más reciente, obviamente teniendo un repositorio en línea (o fuera de línea) disponible con todas las dependencias del paquete cumplidas, bastará con escribir:</p>
-<div class="highlight"><pre><span></span><code>~# apt-get install git
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git
 </code></pre></div>
-
 
 <p>Si utilizas una versión basada en RedHat como Fedora, o CentOs, bastará con el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>~# yum install git-core
+<div class="highlight"><pre><span></span><code>~#<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>git-core
 </code></pre></div>
-
 
 <p>Para sistemas tipo MacOS, recomiendo utilizar Homwbrew, pues particularmente con ese sistema operativo, si bien trae una versión ya instalada y funcional, en la mayoría de los casos me ha tocado ver que es una versión vieja o modificada por el fabricante, que a mi parecer tiene unas opciones de menos o distintas a las instalaciones normales. Entonces, si lo </p>
 <h3>Ahora iniciamos el repositorio</h3>
@@ -102,10 +100,9 @@
 <p>Te recomiendo que leas a detalle el manual oficial, enlace que dejo al final del artículo. Pero para empezar, todo el concepto de control de versiones se basa en <strong>revisión</strong>, es decir, un cambio o un punto en la historia que va a guardar una versión "<em>congelada</em>" de nuestro código o proyecto. Entonces, el <strong>repositorio</strong> es el espacio que ocupa dentro de nuestra computadora todo ese historico y control de cada revisión que vamos haciendo, la facilidad de esto, es que se reduce a una simple carpeta.</p>
 <p>Cuando inicias tu repositorio, en una carpeta con tu proyecto, Git agregará una carpeta adicional llamada <strong>.git</strong>, en la cual va a guardar todo ese control, como si fuese una base de datos, que además revisa para garantizar que la integridad de cada cambio esta completo en el repositorio</p>
 <p>Entonces, ahora nos ubicamos (desde la terminal), en la carpeta de nuestro proyecto o código, donde vas a mantener el repositorio.</p>
-<div class="highlight"><pre><span></span><code>~$ git config user.email <span class="s2">&quot;my-email@gmail.com&quot;</span>
-~$ git config user.name <span class="s2">&quot;My Name&quot;</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;my-email@gmail.com&quot;</span>
+~$<span class="w"> </span>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;My Name&quot;</span>
 </code></pre></div>
-
 
 <p>Solo escriban su correo y su nombre, sustituyendo el contenido entre las comillas dobles, para que configuremos nuestro repositorio. Ahora bien, ¿recuerdas que te había dicho que todo se basa en la <strong>revision</strong>? pues bueno, esta revisión se debe firmar de alguna forma, y Git utiliza nuestro nombre y correo para hacerlo. Si cuando colabores con cualquier otro programador, y utiliza el mismo nombre y correo para firmar sus revisiones, no podrá hacer una distinción entre ambos autores la herramienta de Git.</p>
 <p>Es por eso que es importante realizar siempre la configuración de nuestro nombre y correo, para que exista una relación integra del autor a lo largo del repositorio.</p>
@@ -114,18 +111,16 @@
 <p>Bien, si iniciaste el repositorio en el punto anterior, dentro de una carpeta vacia (usualmente así inician todos los proyectos), no vas a tener ninguna revisión pendiente, hasta que hagas un cambio. Si ya tenías tu proyecto empezado desde antes, con archivos y contenido, ahora vamos a ver como agregar estos cambios y guardar nuestra primera revisión.</p>
 <p>Si no tiene contenido, basta con crear un archivo y meter un texto de ejemplo dentro del archivo.</p>
 <p>Para empezar, debemos agregar los cambios que queremos grabar en la revisón (en nuestro primer commit). Para esto, debemos ejecutar cualquiera de los dos primeros comandos que se muestran enseguida:</p>
-<div class="highlight"><pre><span></span><code>~$ git add --all
-~$ git add .
-~$ git commit -am <span class="s2">&quot;Init commit&quot;</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>--all
+~$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
+~$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;Init commit&quot;</span>
 </code></pre></div>
-
 
 <p>Ambos comandos van a agregar todos los archivos nuevos, que no se han agregado en ningún momento al repositorio. El tercer comando, lo que va a hacer, es crear nuestra revisión, o guardar propiamente nuestro commit. La opción '<em>-a</em>' recalca que queremos incluir todos los cambios pendientes, y la opción '<em>m</em>' indica que debe guardarse el commit con un mensaje, el que mismo que podemos personalizar cambiando el contenido de lo que muestro entre las comillas dobles.</p>
 <p>Cabe recalcar, que los cambios que se van a grabar en la revisión, son solo aquellos que nosotros indiquemos, con el primer comando, también podemos definir con exactitud, los cambios que deseamos agregar a la revisión; por ejemplo, si agregamos dos archivos nuevos a la carpeta, uno llamado '<em>config.txt</em>' y otro llamado '<em>config-prueba.txt</em>', y el segundo no lo queremos guardar, pues solo lo estamos usando momentaneamente, o simplemente no va a ser parte de nuestro repositorio por que es irrelebante, entonces los comandos son los siguientes:</p>
-<div class="highlight"><pre><span></span><code>~$ git add config.txt
-~$ git commit -m <span class="s2">&quot;Agregar el archivo config.txt&quot;</span>
+<div class="highlight"><pre><span></span><code>~$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>config.txt
+~$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Agregar el archivo config.txt&quot;</span>
 </code></pre></div>
-
 
 <p>Si observas el primer comando, no agrega todo, ni el punto (.) del ejemplo anterior, sin embargo si estoy agregando un nombre de archivo, que es propiamente <strong>la ruta</strong> del archivo o carpeta que vamos a agregar como nuevo o como cambio al repositorio. Y también, en el segundo comando la opción '<em>a</em>' desaparece, indicando que solo los cambios agregados por la opción '<em>add</em>' son los que se van a guardar en la revisión.</p>
 <p>El mensaje es opcional, pero una de las mejores prácticas es indicar con presición, lo que estamos haciendo; de esta forma estamos ayudando al 'yo' del futuro, cuando desee revisar que fue lo que se hizo en alguna revisión pasada, en lugar de ir revisando commit por commit.</p>
@@ -138,7 +133,7 @@
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2018-03-04T20:20:00-06:00" pubdate="pubdate">04 de March, 2018</time>.
+  Publicado el <time datetime="2018-03-04T20:20:00-06:00" pubdate="pubdate">04 de marzo, 2018</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/git.html">Git</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/git.html">git</a></span>, <span class="label label-success catego"><a href="./tag/vcs.html">vcs</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -232,13 +227,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

@@ -92,11 +92,9 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># apt-get install boinc-client boinc-manager</span>
 </code></pre></div>
 
-
 <p>Pero en nuestro caso, sin entorno gráfico, solo instalamos el cliente:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># apt-get install boinc-client</span>
 </code></pre></div>
-
 
 <p>Este comando instalará BOINC, pero entiendo un poco más al respecto, realizará los siguientes pasos:</p>
 <ol>
@@ -111,26 +109,23 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/init.d/boinc-client start</span>
 </code></pre></div>
 
-
 <p>Para comprobar que el demonio esta vivo en el sistema, podemos ejecutar el siguiente comando:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ps -el | grep boinc</span>
 </code></pre></div>
-
 
 <p>El resultado mostrará algo como <em>boinc_client</em>, de lo contrario, habrá que revisar los logs de la pieza de software, ubicados en /var/log/boinc. En las referencias al final del artículo, podremos buscar alguna solución.</p>
 <h3>Agregar un proyecto</h3>
 <p>Una vez instalado <strong>BOINC</strong>, ahora necesitamos anotarnos a un proyecto al que deseemos contribuir, y puede buscar el que más sea de su agrado en: <a href="http://boinc.berkeley.edu/projects.php" title="Proyectos de Berkeley">Projects Berkeley</a>. Habrá que seguir el proceso de cada uno de los proyectos para crear una cuenta, pues requerimos el nombre de usuario y contraseña, para empezar a contribuir.</p>
 <p>Ya que contamos con nuestro usuario y contraseña, ejecutamos el comando de <strong><em>boinccmd</em></strong> con el parámetro de <em>lookup_account</em>, para obtener la llave correspondiente, para no utilizar la contraseña siempre, en su lugar, solo una clave de acceso. Después solo bastará utilizar el parámetro <em>project_attach</em> para poder iniciar el proceso y así contribuir al proyecto.</p>
 <p>Un ejemplo de lo anterior es:</p>
-<div class="highlight"><pre><span></span><code>$ boinccmd --lookup_account setiathome.berkeley.edu miusuario micontrasena
-    status: Success
-    poll status: operation in progress
-    poll status: operation in progress
-    poll status: operation in progress
-    account key: 73c06fcd129df53a76e620d128943a019b072
-$ boinccmd --project_attach setiathome.berkeley.edu 73c06fcd129df53a76e620d128943a019b072
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>boinccmd<span class="w"> </span>--lookup_account<span class="w"> </span>setiathome.berkeley.edu<span class="w"> </span>miusuario<span class="w"> </span>micontrasena
+<span class="w">    </span>status:<span class="w"> </span>Success
+<span class="w">    </span>poll<span class="w"> </span>status:<span class="w"> </span>operation<span class="w"> </span><span class="k">in</span><span class="w"> </span>progress
+<span class="w">    </span>poll<span class="w"> </span>status:<span class="w"> </span>operation<span class="w"> </span><span class="k">in</span><span class="w"> </span>progress
+<span class="w">    </span>poll<span class="w"> </span>status:<span class="w"> </span>operation<span class="w"> </span><span class="k">in</span><span class="w"> </span>progress
+<span class="w">    </span>account<span class="w"> </span>key:<span class="w"> </span>73c06fcd129df53a76e620d128943a019b072
+$<span class="w"> </span>boinccmd<span class="w"> </span>--project_attach<span class="w"> </span>setiathome.berkeley.edu<span class="w"> </span>73c06fcd129df53a76e620d128943a019b072
 </code></pre></div>
-
 
 <p>Este ejemplo es con el proyecto de SETI, pero depende de cada uno, nos dará una URL distinta, usualmente con el nombre del poryecto en minusculas, seguido de <em>berkeley.edu</em>, así que es un dato que debemos revisar en nuestra cuenta del proyecto, para definiar correctamente la ruta.</p>
 <p>Al momento de elegir el proyecto al que deseamos contribuir, también es necesario revisar la plataforma en la que esta disponible el proyecto, dado que no todos son para Linux o Windows, y algunos tienen el software necesario para explotar el uso de GPU's, si es que el equipo cuenta con ellos.</p>
@@ -170,7 +165,7 @@ $ boinccmd --project_attach setiathome.berkeley.edu 73c06fcd129df53a76e620d12894
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2017-03-27T20:20:00-06:00" pubdate="pubdate">27 de March, 2017</time>.
+  Publicado el <time datetime="2017-03-27T20:20:00-06:00" pubdate="pubdate">27 de marzo, 2017</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/boinc.html">BOINC</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/debian.html">debian</a></span>, <span class="label label-success catego"><a href="./tag/distribuido.html">distribuido</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -264,13 +259,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>

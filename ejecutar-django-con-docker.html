@@ -89,69 +89,63 @@
 <p>Primero, de acuerdo al tutorial que nos proporciona el sitio oficial de Docker, creamos un par de archivos y los ejecutamos para obtener las dependencias necesarias para hacer funcionar Django adecuadamente.</p>
 <h5>Dockerfile</h5>
 <p>Con pocas variantes respecto al tutorial original de docker, separamos en dos carpetas el código (code) y los archivos estáticos o assets (html), además de indicar una carpeta para las plantillas de Django (templates), dejando el archivo como se muestra:</p>
-<div class="highlight"><pre><span></span><code><span class="err">FROM python:3</span>
-<span class="err">ENV PYTHONUNBUFFERED 1</span>
-<span class="err">RUN mkdir /code</span>
-<span class="err">RUN mkdir -p /var/www/website/html</span>
-<span class="err">WORKDIR /code</span>
-<span class="err">ADD requirements.txt /code/</span>
-<span class="err">RUN pip install -r requirements.txt</span>
-<span class="err">ADD ./example /code/</span>
-<span class="err">ADD ./html /var/www/website/html</span>
-<span class="err">ADD ./example/templates /var/www/website/example/templates</span>
+<div class="highlight"><pre><span></span><code><span class="n">FROM</span><span class="w"> </span><span class="n">python</span><span class="p">:</span><span class="mi">3</span>
+<span class="n">ENV</span><span class="w"> </span><span class="n">PYTHONUNBUFFERED</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">RUN</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">/</span><span class="n">code</span>
+<span class="n">RUN</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">html</span>
+<span class="n">WORKDIR</span><span class="w"> </span><span class="o">/</span><span class="n">code</span>
+<span class="n">ADD</span><span class="w"> </span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span><span class="w"> </span><span class="o">/</span><span class="n">code</span><span class="o">/</span>
+<span class="n">RUN</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">ADD</span><span class="w"> </span><span class="o">./</span><span class="n">example</span><span class="w"> </span><span class="o">/</span><span class="n">code</span><span class="o">/</span>
+<span class="n">ADD</span><span class="w"> </span><span class="o">./</span><span class="n">html</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">html</span>
+<span class="n">ADD</span><span class="w"> </span><span class="o">./</span><span class="n">example</span><span class="o">/</span><span class="n">templates</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">templates</span>
 </code></pre></div>
-
 
 <p>'example' es como he decidido nombrar el proyecto, lo vamos a revisar un poco más adelante.</p>
 <h5>docker-compose.yml</h5>
 <p>Con pocas variantes respecto al tutorial original de docker, indicamos el uso del manejador de base de datos <strong>PostgreSQL</strong> y la configuración con la que va a funcionar Django al momento de arrancar el contenedor (<em>esto es para solo un modo de pruebas o desarrollo</em>):</p>
-<div class="highlight"><pre><span></span><code><span class="c">version: &#39;3&#39;</span>
-<span class="c">services:</span>
-<span class="c">  db:</span>
-<span class="c">    restart: always</span>
-<span class="c">    image: postgres</span>
-<span class="c">  web:</span>
-<span class="c">    restart: always</span>
-<span class="c">    build: .</span>
-<span class="c">    command: python3 manage.py runserver 0.0.0.0:8001</span>
-<span class="c">    volumes:</span>
-<span class="c">      - ./example:/code</span>
-<span class="c">      - ./html:/var/www/website/html</span>
-<span class="c">      - ./example/templates:/var/www/website/example/templates</span>
-<span class="c">    ports:</span>
-<span class="c">      - &quot;8001:8001&quot;</span>
-<span class="c">    depends_on:</span>
-<span class="c">      - db</span>
+<div class="highlight"><pre><span></span><code><span class="n">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span>
+<span class="n">services</span><span class="p">:</span>
+<span class="w">  </span><span class="n">db</span><span class="p">:</span>
+<span class="w">    </span><span class="n">restart</span><span class="p">:</span><span class="w"> </span><span class="n">always</span>
+<span class="w">    </span><span class="n">image</span><span class="p">:</span><span class="w"> </span><span class="n">postgres</span>
+<span class="w">  </span><span class="n">web</span><span class="p">:</span>
+<span class="w">    </span><span class="n">restart</span><span class="p">:</span><span class="w"> </span><span class="n">always</span>
+<span class="w">    </span><span class="n">build</span><span class="p">:</span><span class="w"> </span><span class="o">.</span>
+<span class="w">    </span><span class="n">command</span><span class="p">:</span><span class="w"> </span><span class="n">python3</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">runserver</span><span class="w"> </span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">8001</span>
+<span class="w">    </span><span class="n">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="o">./</span><span class="n">example</span><span class="p">:</span><span class="o">/</span><span class="n">code</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="o">./</span><span class="n">html</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">html</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="o">./</span><span class="n">example</span><span class="o">/</span><span class="n">templates</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">website</span><span class="o">/</span><span class="n">example</span><span class="o">/</span><span class="n">templates</span>
+<span class="w">    </span><span class="n">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="s2">&quot;8001:8001&quot;</span>
+<span class="w">    </span><span class="n">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">db</span>
 </code></pre></div>
-
 
 <h5>requirements.txt</h5>
 <p>Por último, no menos importante, pero ya casi se me olvidaba; cuando trabajamos con proyectos de <strong>Python</strong>, una buena práctica es siempre utilizar el archivo 'requirements.txt', para definir y poder indicar a cualquier otra persona los paquetes y dependencias que requerimos para poder volver a utilizar nuestro código, sin que se tenga que romper la cabeza con las dependencias, con <em>pip</em>.</p>
-<div class="highlight"><pre><span></span><code><span class="err">Django</span>
-<span class="err">psycopg2</span>
-<span class="err">WeasyPrint</span>
-<span class="err">djangorestframework</span>
+<div class="highlight"><pre><span></span><code>Django
+psycopg2
+WeasyPrint
+djangorestframework
 </code></pre></div>
-
 
 <p>En este caso, lo que usualmente utilizo es Django en su versión más reciente. Aunque puedes especificar una versión en concreto de cada paquetes colocando doble igual, de esta forma '==1.8'. El paquete de <strong>pyscopg2</strong> sirve de controlador para poder conectarnos a PostgreSQL, el de <strong>WeasyPrint</strong> sirve para convertir HTML a PDF, bastante útil y pocas veces he llegado a precindir de este. Además, <strong>djangorestgramework</strong> es el mejor paquete para hacer "bien" cualquier servicio RESTful que queramos programar.</p>
 <h3>Ahora unos comandos para hacerlo funcionar</h3>
 <p>En un proyecto tradicional de Django, lo que hacemos justo después de terminar la instalación (ahora se realizará esa parte dentro del contenedor), es ejecutar el comando de startproject, <strong>recuerda hacerlo dentro de la carpeta raíz</strong> de nuestro proyecto y lo haremos de la siguiente manera:</p>
-<div class="highlight"><pre><span></span><code>docker-compose run web django-admin.py startproject example .
+<div class="highlight"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>web<span class="w"> </span>django-admin.py<span class="w"> </span>startproject<span class="w"> </span>example<span class="w"> </span>.
 </code></pre></div>
-
 
 <p>Recuerda no olvidar el <em>punto al final</em>, de lo contrario, te va a crear el comando una carpeta llamada 'example' dentro de nuetra carpeta 'example', a lo que vas a necesitar cambiar estas carpetas para que todo funcione correctamente.</p>
 <p>Tras ejecutar este comando, se realizará la instalación de todo lo necesario dentro del contenedor, dependencias y demás software. <em>Prácticamente estamos listos!</em>. <strong>No te desesperes, pues tardará un rato en terminar</strong> Tenemos que hacer una ligera corrección, dado que Docker aún sigue funcionando en algunas partes con privilegios de administrador, ahora debemos corregirlo para utilizarlo sin problemas.</p>
-<div class="highlight"><pre><span></span><code>chown -R <span class="nv">$USER</span>:<span class="nv">$USER</span> .
+<div class="highlight"><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span><span class="nv">$USER</span>:<span class="nv">$USER</span><span class="w"> </span>.
 </code></pre></div>
-
 
 <p>La leyenda de '$USER' es necesario que la cambies por el nombre de tu usuario; y también ejecutar estos comandos con privilegios de administrador, como <em>root</em> o con <em>sudo</em>.</p>
 <p><strong>Nota</strong>. Un punto con el que puedes recordar como realizar ciertas operaciones como <em>migrate</em>, <em>collectstatic</em> o <em>shell</em>, bastante comunes cuando se trabaja con Django, se puede realizar de la siguiente manera:</p>
-<div class="highlight"><pre><span></span><code>docker-compose run web python3 manage.py &lt;comando&gt;
+<div class="highlight"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>web<span class="w"> </span>python3<span class="w"> </span>manage.py<span class="w"> </span>&lt;comando&gt;
 </code></pre></div>
-
 
 <p>Necesitamos configurar nuestro archivo <em>settings.py</em> con la base de datos, para poderlo hacer funcionar por completo Django. Por lo que basta agregar estas líneas en el archivo correspondiente.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">#..</span>
@@ -169,7 +163,6 @@
 <span class="c1">#..</span>
 </code></pre></div>
 
-
 <p><strong>Y listo!</strong>, cualquier otro comando que queramos utilizar lo usamos como antes lo mencioné. Y solo basta utilizar los comandos base de <em>docker-compose</em> para detener, arrancar o destruir nuestro contenedor con Django, <strong>happy coding...</strong>.</p>
 <h4>Fuentes:</h4>
 <ol>
@@ -179,7 +172,7 @@
 </ol>
                     </div>
 <div class="meta align-right">
-  Publicado el <time datetime="2017-07-07T22:20:00-05:00" pubdate="pubdate">07 de July, 2017</time>.
+  Publicado el <time datetime="2017-07-07T22:20:00-05:00" pubdate="pubdate">07 de julio, 2017</time>.
   Categoria «<span class="label label-primary catego"><a href="./category/docker.html">Docker</a></span>».  
  Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/django.html">django</a></span>, <span class="label label-success catego"><a href="./tag/docker.html">docker</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
                         
@@ -273,13 +266,11 @@ s.setAttribute('data-timestamp', +new Date());
     <script src="./theme/assets/js/bootstrap.min.js"></script>
     <script src="./theme/assets/js/material.min.js"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-      ga('create', 'UA-23072012-2', 'auto');
-      ga('send', 'pageview');
-
+      gtag('config', 'G-5L1GPZTGNF');
     </script></html>
