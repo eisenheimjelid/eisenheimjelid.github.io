@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Sitio Web de David León - Services on AlmaLinux Using `systemctl`</title>
+    <meta description="Publicación de noticias, tips y tutoriales de programación y tecnologías de la información" />
+    <meta name="author" content="David León">
+    <meta author="David León" />
+    <link rel="icon" href="./theme/favicon.ico">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="./theme/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/materialkit.css" rel="stylesheet"/>
+    <link href="./theme/assets/css/main.css" rel="stylesheet"/>
+</head>
+
+<body>
+<nav class="navbar navbar-fixed-top navbar-color-on-scroll">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://davfl.com.mx/">David León</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation-example">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/archives.html">
+                        <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="https://poetadeocasion.wordpress.com/" title="Blog" target="_blank">
+                        <i class="fa fa-heart-o"></i> d'Ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="https://haridandleon.wordpress.com/" title="Entretenimiento" target="_blank">
+                        <i class="fa fa-rebel"></i> Otros
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/jelidleon" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/eisenheimjelid/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tumblr.com/blog/jelid" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+                        <i class="fa fa-tumblr"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>    <div class="wrapper">
+        <div class="header header-filter article-head" style="background-image: url('./theme/assets/img/background.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title">Services on AlmaLinux Using `systemctl`</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main main-raised">
+            <div class="container"><br />
+            <div class="row">
+                    <div class="col-sm-8 col-md-8 col-sx-12 col-lg-9">
+                    <div class="article-contenido">
+                        <h1>Installing Services on AlmaLinux Using <code>systemctl</code></h1>
+<h2>Introduction</h2>
+<p>Monitoring servers and applications is a fundamental task in system administration. Tools like Prometheus and Grafana have become industry standards for observability, and exporters are used to collect metrics from various sources. These exporters are services that run on the server and expose metrics in a format that Prometheus can understand and collect.</p>
+<p>On AlmaLinux, an RHEL-based distribution, the main initialization and service management system is <code>systemd</code>, controlled via the <code>systemctl</code> command. This post details the general steps for installing a service on AlmaLinux using <code>systemctl</code>, taking the installation of exporters like <code>php-fpm_exporter</code> (for PHP-FPM metrics) and <code>mysqld_exporter</code> (for MySQL metrics) as examples.</p>
+<h2>Steps for Service Installation with <code>systemctl</code></h2>
+<p>Installing a custom service, such as an exporter, typically involves obtaining the executable binary and configuring <code>systemd</code> to manage it. The following steps are based on the processes described for <code>php-fpm_exporter</code> and <code>mysqld_exporter</code>:</p>
+<p>1.<strong>Download the service binary file.</strong> This is typically done using a tool like <code>wget</code> or <code>curl</code> to get the executable file directly from a reliable source. For <code>php-fpm_exporter</code>, a specific binary for Linux AMD64 was downloaded. For <code>mysqld_exporter</code>, a <code>.tar.gz</code> file containing the binary was downloaded.</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://github.com/hipages/php-fpm_exporter/releases/download/v2.2.0/php-fpm_exporter_2.2.0_linux_amd64
+
+wget<span class="w"> </span>https://github.com/prometheus/mysqld_exporter/releases/download/v0.17.2/mysqld_exporter-0.17.2.linux-amd64.tar.gz
+</code></pre></div>
+
+<p>2.If the downloaded file is a compressed archive (like <code>.tar.gz</code>), <strong>decompress it.</strong> The <code>tar -zxvf</code> command is used for <code>.tar.gz</code> files.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-zxvf<span class="w"> </span>mysqld_exporter-0.17.2.linux-amd64.tar.gz
+</code></pre></div>
+
+<p>3.<strong>Place the service binary file</strong> in an appropriate system path, such as <code>/usr/bin</code>. This path is common for system executables. The <code>cp</code> or <code>mv</code> command is used to move the decompressed or downloaded file to the desired path.</p>
+<div class="highlight"><pre><span></span><code>mv<span class="w"> </span>php-fpm_exporter_2.2.0_linux_amd64<span class="w"> </span>/usr/bin/php-fpm_exporter
+
+cp<span class="w"> </span>mysqld_exporter-0.17.2.linux-amd64/mysqld_exporter<span class="w"> </span>/usr/bin/mysqld_exporter
+</code></pre></div>
+
+<p>4.<strong>Assign the correct user and group</strong> to the binary file. For security and permissions reasons, it is recommended that the service does not run as <code>root</code>. In the examples, <code>chown</code> was used with specific user and group IDs (<code>1001:1002</code>, or <code>node_exporter</code> in the service file).</p>
+<div class="highlight"><pre><span></span><code>chown<span class="w"> </span><span class="m">1001</span>:1002<span class="w"> </span>/usr/bin/php-fpm_exporter
+chown<span class="w"> </span><span class="m">1001</span>:1002<span class="w"> </span>/usr/bin/mysqld_exporter
+</code></pre></div>
+
+<p>5.<strong>Verify and assign execute permissions</strong> to the binary file. It is crucial that the file has permissions to be executed. The <code>chmod +x</code> command is used.</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/bin/php-fpm_exporter
+chmod<span class="w"> </span>+x<span class="w"> </span>/usr/bin/mysqld_exporter
+</code></pre></div>
+
+<p>6.<strong>Create or modify the unit file</strong> (<code>.service</code>) for <code>systemd</code>. This file defines how <code>systemd</code> should manage the service and is saved in the <code>/etc/systemd/system/</code> path. It describes the <strong>description</strong> (<code>Description</code>), <strong>dependencies</strong> (<code>After=network.target</code>), the <strong>user and group</strong> it runs as (<code>User=</code>, <code>Group=</code>), the <strong>startup type</strong> (<code>Type=simple</code>), and most importantly, the <strong>path to the executable binary</strong> (<code>ExecStart=</code>). In the examples, an existing service file (<code>node_exporter.service</code>) was duplicated and modified.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/etc/systemd/system/
+
+nano<span class="w"> </span>php-fpm_exporter.service
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Typical content of the `.service` file:
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">PHP-FPM Exporter</span><span class="w"> </span><span class="c1"># Or MySQL Daemon Exporter</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">User</span><span class="o">=</span><span class="s">node_exporter</span><span class="w"> </span><span class="c1"># Make sure this user exists</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">node_exporter</span><span class="w"> </span><span class="c1"># Make sure this group exists</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/php-fpm_exporter</span><span class="w"> </span><span class="c1"># Or /usr/bin/mysqld_exporter</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span><span class="w"> </span><span class="c1"># (Optional but recommended) Restart if it fails</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</code></pre></div>
+
+<p>7.<strong>Reload the systemd daemon</strong>. This is necessary for <code>systemd</code> to read and recognize the new service unit file that has just been created or modified.</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>daemon-reload
+</code></pre></div>
+
+<p>8.<strong>Start the service</strong> for the first time. The <code>systemctl start &lt;service_name&gt;</code> command is used, where <code>&lt;service_name&gt;</code> is the name of the <code>.service</code> file without the extension (e.g., <code>php-fpm_exporter</code> or <code>mysqld_exporter</code>).</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>php-fpm_exporter
+
+systemctl<span class="w"> </span>start<span class="w"> </span>mysqld_exporter
+</code></pre></div>
+
+<p>9.<strong>Enable the service</strong> so that it starts automatically every time the system boots.</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>php-fpm_exporter
+
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mysqld_exporter
+</code></pre></div>
+
+<p>10.<strong>Restart the service</strong> if changes were made to the unit file (<code>.service</code>) or the service's configuration (although for configuration changes, a <code>reload</code> might suffice if the service supports it, <code>restart</code> is safer to apply any changes).</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>php-fpm_exporter
+
+systemctl<span class="w"> </span>restart<span class="w"> </span>mysqld_exporter
+</code></pre></div>
+
+<p>11.<strong>Check the service status</strong> to confirm that it is running correctly. The <code>systemctl status &lt;service_name&gt;</code> command is used.</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>php-fpm_exporter
+
+systemctl<span class="w"> </span>status<span class="w"> </span>mysqld_exporter
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">The</span><span class="w"> </span><span class="o">**</span><span class="n">important</span><span class="w"> </span><span class="n">output</span><span class="o">**</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">shows</span><span class="w"> </span><span class="n n-Quoted">`Active: active (running)`</span><span class="p">.</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">confirms</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n n-Quoted">`systemd`</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">keeping</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">running</span><span class="p">.</span>
+</code></pre></div>
+
+<h2>Conclusion</h2>
+<p>By following these steps, we have successfully installed and configured a service (in this case, an exporter) on AlmaLinux to be managed by <code>systemd</code> and <code>systemctl</code>. This process is fundamental for ensuring that background applications and tools run reliably and automatically upon system startup. Once the service is <code>active (running)</code>, it is ready to perform its function, such as exposing metrics for Prometheus to collect. Centralized management via <code>systemctl</code> simplifies the tasks of starting, stopping, restarting, and monitoring the status of services on the server.</p>
+                    </div>
+<div class="meta align-right">
+  Publicado el <time datetime="2025-05-04T19:00:00-06:00" pubdate="pubdate">04 de mayo, 2025</time>.
+  Categoria «<span class="label label-primary catego"><a href="./category/linux.html">Linux</a></span>».  
+ Etiquetado como: <span class="label label-success catego"><a href="./tag/linux.html">linux</a></span>, <span class="label label-success catego"><a href="./tag/terminal.html">terminal</a></span>, <span class="label label-success catego"><a href="./tag/comandos.html">comandos</a></span></p></div>                     <div class="sharethis-inline-share-buttons">
+                        
+                    </div>
+                    <div><h4>Comentarios</h4>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = .install-services-on-alma-linx-using-systemctl-en.html;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = install-services-on-alma-linx-using-systemctl-en.html; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://davflsite.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                    </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-sx-12 col-lg-3"><br />
+<a href="/categories.html" title="Categorias y Etiquetas">Listado de Categorias y Etiquetas.</a><br />
+<div class="twitter-sidebar" id="twitter-sidebar">
+<a class="twitter-timeline" href="https://twitter.com/jelidleon"  data-tweet-limit="5">Tweets by jelidleon</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div><div class="col-md-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-sidebar2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="1367534401"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><br />                    </div>
+                </div>
+<br />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- www.DAVFL-footer -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5724119311477890"
+     data-ad-slot="3263070005"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                <br />
+            </div>
+        </div>
+
+<footer class="footer">
+    <div class="container">
+        <nav class="pull-left">
+            <ul>
+                <li>
+                    <a href="/author/david-leon" target="_blank" title="Más sobre mi">
+                        <i class="fa fa-info"></i> Sobre mi en la red
+                    </a>
+                </li>
+                <li>
+                    <a href="/archives.html">
+                       <i class="fa fa-archive"></i> Base de Conocimientos
+                    </a>
+                </li>
+                <li>
+                    <a href="https://poetadeocasion.wordpress.com/" title="Blog Poeta de Ocasión" target="_blank">
+                       <i class="fa fa-heart-o"></i> d'ocasión
+                    </a>
+                </li>
+                <li>
+                    <a href="/pages/licencia.html">
+                        <i class="fa fa-cc"></i> Licencia
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright pull-right">
+            <a href="/author/david-leon">David León</a>
+        </div>
+    </div>
+</footer>    </div>
+</body>
+    <script src="./theme/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="./theme/assets/js/bootstrap.min.js"></script>
+    <script src="./theme/assets/js/material.min.js"></script>
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58cd4861115dd2001125f1ea&product=inline-share-buttons"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L1GPZTGNF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5L1GPZTGNF');
+    </script></html>
